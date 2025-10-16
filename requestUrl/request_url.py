@@ -1,56 +1,55 @@
 import requests
 
+def request_all(rows):
+    
+    print(rows)
+    resultados = []
 
-def request_all(row):
+#     print('Estou no request')
+#     print(f"Quantidade de registros recebidos: {len(rows)}")
 
- print(row)
- rede = str(row.get('rede', ''))
- loja= str(row.get('loja',''))
- contrato = str(row.get('contrato', ''))
- codigo_cns = str(row.get('codcns', ''))
- processo_id = row.get('processo_id')
- parametros = row.get('paramentros', '')
+    for registros in rows:
+        rede = str(registros.get('rede', ''))
+        loja = str(registros.get('loja', ''))
+        contrato = str(registros.get('contrato', ''))
+        codigo_cns = str(registros.get('codcns', ''))
+        processo_id = registros.get('processo_id')
+        parametros = registros.get('parametros', '')  # corrigido: era "paramentros"
+        servidor = 'proscore.com.br'
 
- servidor = 'proscore.com.br'
- url = (
-  f"https://{servidor}/cns/json.chp?"
-  f"progestor_prc={processo_id}&rde={rede}&rdelja={loja}"
-  f"&ctr={contrato}&srvcns=1&tcnscod=281998{parametros}"
- )
- print(f"URL:", url)
- 
- erro = False
- resposta = ""
- try:
-        r = requests.get(url, timeout=300)  # timeout em segundos
-        r.raise_for_status()  # levanta erro se status != 200
-        resposta = r.text
-        #erro = True
-        print("Resposta:", resposta)
-        if not None:
-              erro = True
-       
-        else:
-         erro = False
+        # Monta URL
+        url = (
+            f"https://{servidor}/cns/json.chp?"
+            f"progestor_prc={processo_id}&rde={rede}&rdelja={loja}"
+            f"&ctr={contrato}&srvcns=1&tcnscod={codigo_cns}{parametros}"
+        )
 
- except Exception as e:
-        resposta = str(e)
-        erro = True
+     
+        erro = False
+        resposta = ""
 
- if not resposta.strip():
-        resposta = "RESPOSTA NAO OBTIDA"
-        erro = True
+        try:
+            r = requests.get(url, timeout=30)
+            r.raise_for_status()
+            resposta = r.text.strip()
 
-    # --- Montando linha de saída ---
- output = {
-        "url": url,
-        "resposta_json": resposta,
-        "erro": erro
-    }
- 
- row.update(output)
- 
-  
- return row
+            if not resposta:
+                resposta = "RESPOSTA NAO OBTIDA"
+                erro = True
 
- #print(f"RESULTADO DA SOLICITACAO:", output)
+        except Exception as e:
+            resposta = f"Erro na requisição: {e}"
+            erro = True
+
+        # Monta saída
+        row_up = registros.copy()
+        row_up.update({
+            "url": url,
+            "resposta_json": resposta,
+            "erro": erro
+        })
+
+     
+        resultados.append(row_up)
+
+    return resultados

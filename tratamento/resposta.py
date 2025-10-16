@@ -4,15 +4,18 @@ import re
 def respost_transfor(dados):
     print(dados)
     print('éstou recebendo os dados')
-    resposta = dados.get('resposta_json', '')
+    new =[]
+    for registro in dados:
+    
+        resposta = registro.get('resposta_json', '')
     
     
-    resposta_limpa = re.sub(r"[\n\r\t]+", "" ,resposta).strip()
+        resposta_limpa = re.sub(r"[\n\r\t]+", "" ,resposta).strip()
     
-    dados['resposta_json'] = resposta_limpa
+        registro['resposta_json'] = resposta_limpa
+        new.append(registro.copy())
     
-    
-    return dados
+    return new
     
     
     

@@ -17,16 +17,17 @@ def selecionar():
 	                t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
                     WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false AND p.processo_id = 303
+                    p.pause = false AND p.error = false AND p.processo_id = 307
             
-               ORDER BY random() limit 1;""")
+               ORDER BY random() limit 10;""")
       cursor.execute(dados)
       result_dados = cursor.fetchall()
-      colunas = [desc[0] for desc in cursor.description]
       if not result_dados:
            return None
-      linha = result_dados[0]
-      registro = dict(zip(colunas, linha))
+      colunas = [desc[0] for desc in cursor.description]
+    
+    #   linha = result_dados[0]
+      registro = [dict(zip(colunas, linha)) for linha in  result_dados]
     
       return registro
 #  where p.processo_id =  and t.transacao_id in (2995922,2995923,2995924,2995925,2995926,2995927,2995928,2995929)

@@ -17,7 +17,7 @@ def selecionar():
 	                t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
                     WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false AND p.processo_id = 307
+                    p.pause = false AND p.error = false AND p.processo_id = 322
             
                ORDER BY random() limit 10;""")
       cursor.execute(dados)

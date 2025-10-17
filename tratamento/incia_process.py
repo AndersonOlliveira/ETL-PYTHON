@@ -10,11 +10,11 @@ def prepara_campos(rows):
         linha = retorno_dados.get("campo_aquisicao") or ""
         campos_aquisicao = retorno_dados.get("campos_aquisicao") or "tcpfcnpj"
 
-        # Debug opcional
+    
      #    print(f"\nRecebido campo_aquisicao: {linha}")
      #    print(f"Campos de aquisição: {campos_aquisicao}")
 
-        # Divide campos e valores
+    
         campos = campos_aquisicao.split(",")
         valores = linha.split(";")
 
@@ -31,10 +31,10 @@ def prepara_campos(rows):
                 erro = True
                 print(f"Erro ao gerar parâmetros: {e}")
 
-        # Limpa possíveis caracteres estranhos (ex: r|)
+        # Limpa caracteres estranhos (ex: r|)
         campo_aquisicao_limpo = re.sub(r"r\|", " ", linha)
 
-        # Atualiza o dicionário com os novos campos
+        # Atualiza  novos campos
         row_out = retorno_dados.copy()
         row_out.update({
             "parametros": parametros,

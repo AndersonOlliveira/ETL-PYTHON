@@ -4,6 +4,8 @@ from tratamento.resposta import respost_transfor
 from conection.transation_status import insert_transation
 from conection.transation_status import insertNewStatus
 from requestUrl.request_url import request_all
+from threading import Thread, BoundedSemaphore
+from concurrent.futures import ThreadPoolExecutor
 # from FinalProces.verifiy_process import up_process
 from tabulate import tabulate
 import json
@@ -58,8 +60,9 @@ def main():
                      new.append(t.copy())
                  
                # print(new)  
-               insertNewStatus(new)
-               
+        result_dados = insertNewStatus(new)
+        
+        return f"Taregfa {result_campos} Concuido"       
                
                
                
@@ -73,4 +76,9 @@ def main():
 
 
 if __name__ == "__main__":
-     main()
+   with ThreadPoolExecutor(max_workers=3) as executor:
+      resultados = executor.map(main())
+        
+   for resultado in resultados:
+          print(resultado)
+   #   main()

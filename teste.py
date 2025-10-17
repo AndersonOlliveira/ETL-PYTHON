@@ -45,7 +45,7 @@ def request_all(dados_):
         }
 
         # Monta a URL da requisição
-        servidor = "proscore.com.br"  # altere se necessário
+        servidor = "proscore.com.br" # link para do servidor
         url = (
             f"https://{servidor}/cns/json.chp?"
             f"progestor_prc={registro['processo_id']}"
@@ -60,7 +60,7 @@ def request_all(dados_):
 
       
         try:
-            r = requests.get(url, timeout=20)
+            r = requests.get(url, timeout=300000)
             r.raise_for_status()
             resposta_texto = r.text.strip()
 
@@ -85,7 +85,7 @@ def request_all(dados_):
     df_saida = pd.DataFrame(resultados)
     df_saida.to_csv(arquivo_saida, index=False, sep=';', encoding='utf-8-sig')
 
-    print(f"\n✅ Arquivo '{arquivo_saida}' salvo com {len(df_saida)} registros!")
+    print(f"\n Arquivo '{arquivo_saida}' salvo com {len(df_saida)} registros!")
     return resultados
 
 

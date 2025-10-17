@@ -31,7 +31,7 @@ def new_main():
         new.append(row_out)
         
         
-         #realizo o updentro da tabela 
+         #realizo o up dentro da tabela 
         
             
  

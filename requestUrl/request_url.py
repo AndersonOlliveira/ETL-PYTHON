@@ -14,10 +14,10 @@ def request_all(rows):
         contrato = str(registros.get('contrato', ''))
         codigo_cns = str(registros.get('codcns', ''))
         processo_id = registros.get('processo_id')
-        parametros = registros.get('parametros', '')  # corrigido: era "paramentros"
+        parametros = registros.get('parametros', '')  
         servidor = 'proscore.com.br'
 
-        # Monta URL
+
         url = (
             f"https://{servidor}/cns/json.chp?"
             f"progestor_prc={processo_id}&rde={rede}&rdelja={loja}"
@@ -29,7 +29,7 @@ def request_all(rows):
         resposta = ""
 
         try:
-            r = requests.get(url, timeout=30)
+            r = requests.get(url, timeout=3000)
             r.raise_for_status()
             resposta = r.text.strip()
 

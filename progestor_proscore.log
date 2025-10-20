@@ -1,0 +1,410 @@
+2025-10-20 13:07:54,925 - INFO - ================================================================================
+2025-10-20 13:07:54,926 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 13:07:54.925408
+2025-10-20 13:07:54,926 - INFO - ================================================================================
+2025-10-20 13:21:57,859 - INFO - ================================================================================
+2025-10-20 13:21:57,860 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 13:21:57.858911
+2025-10-20 13:21:57,860 - INFO - ================================================================================
+2025-10-20 13:22:04,835 - INFO - ================================================================================
+2025-10-20 13:22:04,835 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 13:22:04.835253
+2025-10-20 13:22:04,836 - INFO - ================================================================================
+2025-10-20 13:22:23,393 - INFO - ================================================================================
+2025-10-20 13:22:23,394 - INFO - Iniciando Progestor - Consulta Proscoressss - 2025-10-20 13:22:23.393532
+2025-10-20 13:22:23,394 - INFO - ================================================================================
+2025-10-20 17:27:49,632 - INFO - ================================================================================
+2025-10-20 17:27:49,633 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:27:49.632316
+2025-10-20 17:27:49,634 - INFO - ================================================================================
+2025-10-20 17:27:49,634 - ERROR - Erro fatal na execução: 'Processor' object has no attribute 'processar_lote'
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\arquivo_teste.py", line 17, in executar
+    total_processados = instance.processar_lote()
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Processor' object has no attribute 'processar_lote'
+2025-10-20 17:39:40,779 - INFO - ================================================================================
+2025-10-20 17:39:40,780 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:39:40.779648
+2025-10-20 17:39:40,781 - INFO - ================================================================================
+2025-10-20 17:39:41,387 - ERROR - Erro fatal na execução: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+Traceback (most recent call last):
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 466, in executar
+    total_processados = self.processar_lote()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 377, in processar_lote
+    registros = self.captura_registros()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 130, in captura_registros
+    with DbConnect(self.config) as conn:
+         ~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 54, in __enter__
+    self.connection = psycopg2.connect(
+                      ~~~~~~~~~~~~~~~~^
+        host=self.config.HOST,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        password=self.config.PASSWORD
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\proScore_25\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-10-20 17:39:42,484 - INFO - ================================================================================
+2025-10-20 17:39:42,487 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:39:42.484058
+2025-10-20 17:39:42,488 - INFO - ================================================================================
+2025-10-20 17:39:42,688 - ERROR - Erro fatal na execução: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+Traceback (most recent call last):
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 466, in executar
+    total_processados = self.processar_lote()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 377, in processar_lote
+    registros = self.captura_registros()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 130, in captura_registros
+    with DbConnect(self.config) as conn:
+         ~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 54, in __enter__
+    self.connection = psycopg2.connect(
+                      ~~~~~~~~~~~~~~~~^
+        host=self.config.HOST,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        password=self.config.PASSWORD
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\proScore_25\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-10-20 17:39:43,946 - INFO - ================================================================================
+2025-10-20 17:39:43,947 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:39:43.946561
+2025-10-20 17:39:43,947 - INFO - ================================================================================
+2025-10-20 17:39:44,066 - ERROR - Erro fatal na execução: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+Traceback (most recent call last):
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 466, in executar
+    total_processados = self.processar_lote()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 377, in processar_lote
+    registros = self.captura_registros()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 130, in captura_registros
+    with DbConnect(self.config) as conn:
+         ~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 54, in __enter__
+    self.connection = psycopg2.connect(
+                      ~~~~~~~~~~~~~~~~^
+        host=self.config.HOST,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        password=self.config.PASSWORD
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\proScore_25\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-10-20 17:42:02,834 - INFO - ================================================================================
+2025-10-20 17:42:02,834 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:42:02.834109
+2025-10-20 17:42:02,835 - INFO - ================================================================================
+2025-10-20 17:42:02,950 - ERROR - Erro fatal na execução: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+Traceback (most recent call last):
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 466, in executar
+    total_processados = self.processar_lote()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 377, in processar_lote
+    registros = self.captura_registros()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 130, in captura_registros
+    with DbConnect(self.config) as conn:
+         ~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 54, in __enter__
+    self.connection = psycopg2.connect(
+                      ~~~~~~~~~~~~~~~~^
+        host=self.config.HOST,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        password=self.config.PASSWORD
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\proScore_25\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-10-20 17:57:51,487 - INFO - ================================================================================
+2025-10-20 17:57:51,489 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:57:51.487214
+2025-10-20 17:57:51,490 - INFO - ================================================================================
+2025-10-20 17:57:51,490 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 17:57:51,491 - INFO - Lote processado com sucesso.
+2025-10-20 17:57:51,491 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 17:57:51,493 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 17:57:51,494 - INFO - Total de registros processados: 1
+2025-10-20 17:58:27,234 - INFO - ================================================================================
+2025-10-20 17:58:27,235 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:58:27.234537
+2025-10-20 17:58:27,235 - INFO - ================================================================================
+2025-10-20 17:58:27,236 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 17:58:27,236 - INFO - Lote processado com sucesso.
+2025-10-20 17:58:27,237 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 17:58:27,237 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 17:58:27,238 - INFO - Total de registros processados: 1
+2025-10-20 17:59:45,482 - INFO - ================================================================================
+2025-10-20 17:59:45,483 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 17:59:45.482817
+2025-10-20 17:59:45,484 - INFO - ================================================================================
+2025-10-20 17:59:45,485 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 17:59:45,485 - INFO - Lote processado com sucesso.
+2025-10-20 17:59:45,486 - ERROR - Erro fatal na execução: 'module' object is not callable
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 27, in executar
+    dados = busca_dados()
+TypeError: 'module' object is not callable
+2025-10-20 18:01:31,182 - INFO - ================================================================================
+2025-10-20 18:01:31,183 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:01:31.182503
+2025-10-20 18:01:31,184 - INFO - ================================================================================
+2025-10-20 18:01:31,184 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:01:31,185 - INFO - Lote processado com sucesso.
+2025-10-20 18:01:33,169 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:01:33,175 - INFO - Processamento concluído em 1.99 segundos
+2025-10-20 18:01:33,178 - INFO - Total de registros processados: 1
+2025-10-20 18:02:54,268 - INFO - ================================================================================
+2025-10-20 18:02:54,270 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:02:54.268387
+2025-10-20 18:02:54,270 - INFO - ================================================================================
+2025-10-20 18:02:54,271 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:02:54,271 - INFO - Lote processado com sucesso.
+2025-10-20 18:02:54,272 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:02:54,272 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 18:02:54,273 - INFO - Total de registros processados: 1
+2025-10-20 18:03:26,576 - INFO - ================================================================================
+2025-10-20 18:03:26,576 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:03:26.576193
+2025-10-20 18:03:26,577 - INFO - ================================================================================
+2025-10-20 18:03:26,577 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:03:26,578 - INFO - Lote processado com sucesso.
+2025-10-20 18:03:26,579 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:03:26,579 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 18:03:26,580 - INFO - Total de registros processados: 1
+2025-10-20 18:03:52,748 - INFO - ================================================================================
+2025-10-20 18:03:52,749 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:03:52.748743
+2025-10-20 18:03:52,750 - INFO - ================================================================================
+2025-10-20 18:03:52,750 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:03:52,751 - INFO - Lote processado com sucesso.
+2025-10-20 18:03:52,752 - ERROR - Erro fatal na execução: 'Logger' object is not callable
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 32, in executar
+    classLogger.logger('o que tenho de dados aquui')
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Logger' object is not callable
+2025-10-20 18:04:02,479 - INFO - ================================================================================
+2025-10-20 18:04:02,480 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:04:02.479818
+2025-10-20 18:04:02,481 - INFO - ================================================================================
+2025-10-20 18:04:02,481 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:04:02,482 - INFO - Lote processado com sucesso.
+2025-10-20 18:04:02,482 - WARNING - o que tenho de dados aquui
+2025-10-20 18:04:02,483 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:04:02,484 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 18:04:02,485 - INFO - Total de registros processados: 1
+2025-10-20 18:04:26,250 - INFO - ================================================================================
+2025-10-20 18:04:26,250 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:04:26.250222
+2025-10-20 18:04:26,251 - INFO - ================================================================================
+2025-10-20 18:04:26,251 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:04:26,252 - INFO - Lote processado com sucesso.
+2025-10-20 18:04:26,252 - WARNING - 1
+2025-10-20 18:04:26,253 - WARNING - o que tenho de dados aquui
+2025-10-20 18:04:26,253 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:04:26,254 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 18:04:26,254 - INFO - Total de registros processados: 1
+2025-10-20 18:06:47,533 - INFO - ================================================================================
+2025-10-20 18:06:47,534 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:06:47.533823
+2025-10-20 18:06:47,535 - INFO - ================================================================================
+2025-10-20 18:06:47,535 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:06:47,535 - WARNING - 1
+2025-10-20 18:06:47,536 - WARNING - o que tenho de dados aquui
+2025-10-20 18:06:47,536 - INFO - Lote processado com sucesso.
+2025-10-20 18:06:47,537 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:06:47,537 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 18:06:47,537 - INFO - Total de registros processados: 1
+2025-10-20 18:07:19,751 - INFO - ================================================================================
+2025-10-20 18:07:19,752 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:07:19.751159
+2025-10-20 18:07:19,752 - INFO - ================================================================================
+2025-10-20 18:07:19,753 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:07:19,753 - WARNING - 1
+2025-10-20 18:07:19,754 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:07:19,754 - INFO - Lote processado com sucesso.
+2025-10-20 18:07:19,754 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:07:19,755 - INFO - Processamento concluído em 0.00 segundos
+2025-10-20 18:07:19,755 - INFO - Total de registros processados: 1
+2025-10-20 18:09:30,062 - INFO - ================================================================================
+2025-10-20 18:09:30,062 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:09:30.062044
+2025-10-20 18:09:30,063 - INFO - ================================================================================
+2025-10-20 18:09:30,063 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:09:31,772 - WARNING - 1
+2025-10-20 18:09:31,773 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:09:31,775 - WARNING - [{'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998227, 'id_processo': 323, 'campo_aquisicao': '13282736797', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 40, 317254), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}, {'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998234, 'id_processo': 323, 'campo_aquisicao': '11698322615', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 30, 673541), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}]
+2025-10-20 18:09:31,787 - INFO - Lote processado com sucesso.
+2025-10-20 18:09:31,789 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:09:31,794 - INFO - Processamento concluído em 1.73 segundos
+2025-10-20 18:09:31,795 - INFO - Total de registros processados: 1
+2025-10-20 18:17:25,266 - INFO - ================================================================================
+2025-10-20 18:17:25,266 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:17:25.266123
+2025-10-20 18:17:25,267 - INFO - ================================================================================
+2025-10-20 18:17:25,267 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:17:27,480 - WARNING - 1
+2025-10-20 18:17:27,480 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:17:27,481 - WARNING - [{'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998236, 'id_processo': 323, 'campo_aquisicao': '33289530604', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 34, 638252), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}, {'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998228, 'id_processo': 323, 'campo_aquisicao': '01037160762', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 31, 457859), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}]
+2025-10-20 18:17:27,483 - INFO - Iniciando processamento de 2 registros
+2025-10-20 18:17:27,483 - ERROR - Erro fatal na execução: name 'self' is not defined
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 26, in executar
+    total_processados = processar_lote(self.batch_size)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\process_lote.py", line 23, in processar_lote
+    classLogger.logger.warn(f"{self.servidor}")
+                               ^^^^
+NameError: name 'self' is not defined
+2025-10-20 18:17:51,453 - INFO - ================================================================================
+2025-10-20 18:17:51,454 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:17:51.453453
+2025-10-20 18:17:51,454 - INFO - ================================================================================
+2025-10-20 18:17:51,455 - INFO - Iniciando processamento de lote (<classsProcessor_teste.Processor object at 0x000001A34FA178C0> registros máx).
+2025-10-20 18:17:53,290 - WARNING - <classsProcessor_teste.Processor object at 0x000001A34FA178C0>
+2025-10-20 18:17:53,291 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:17:53,293 - WARNING - [{'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998242, 'id_processo': 323, 'campo_aquisicao': '00569287693', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 36, 267322), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}, {'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998234, 'id_processo': 323, 'campo_aquisicao': '11698322615', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 30, 673541), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}]
+2025-10-20 18:17:53,308 - INFO - Iniciando processamento de 2 registros
+2025-10-20 18:17:53,310 - ERROR - Erro fatal na execução: name 'self' is not defined
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 26, in executar
+    total_processados = processar_lote(self)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\process_lote.py", line 23, in processar_lote
+    classLogger.logger.warn(f"{self.servidor}")
+                               ^^^^
+NameError: name 'self' is not defined
+2025-10-20 18:18:43,191 - INFO - ================================================================================
+2025-10-20 18:18:43,192 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:18:43.191425
+2025-10-20 18:18:43,193 - INFO - ================================================================================
+2025-10-20 18:18:43,193 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:18:44,838 - WARNING - 1
+2025-10-20 18:18:44,840 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:18:44,842 - WARNING - [{'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998249, 'id_processo': 323, 'campo_aquisicao': '09396506656', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 27, 942051), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}, {'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998242, 'id_processo': 323, 'campo_aquisicao': '00569287693', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 36, 267322), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}]
+2025-10-20 18:18:44,857 - INFO - Iniciando processamento de 2 registros
+2025-10-20 18:18:44,859 - WARNING - proscore.com.br
+2025-10-20 18:18:44,862 - ERROR - Erro fatal na execução: name 'batch_size' is not defined
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 26, in executar
+    total_processados = processar_lote(self)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\process_lote.py", line 30, in processar_lote
+    for i in range(batch_size):
+                   ^^^^^^^^^^
+NameError: name 'batch_size' is not defined. Did you mean: 'self.batch_size'?
+2025-10-20 18:19:13,368 - INFO - ================================================================================
+2025-10-20 18:19:13,369 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:19:13.368195
+2025-10-20 18:19:13,369 - INFO - ================================================================================
+2025-10-20 18:19:13,370 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:19:15,201 - WARNING - 1
+2025-10-20 18:19:15,203 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:19:15,204 - WARNING - [{'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998242, 'id_processo': 323, 'campo_aquisicao': '00569287693', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 36, 267322), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}, {'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998247, 'id_processo': 323, 'campo_aquisicao': '06856600607', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 37, 856342), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}]
+2025-10-20 18:19:15,219 - INFO - Iniciando processamento de 2 registros
+2025-10-20 18:19:15,221 - WARNING - proscore.com.br
+2025-10-20 18:19:15,223 - INFO - Lote processado com sucesso.
+2025-10-20 18:19:15,225 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:19:15,230 - INFO - Processamento concluído em 1.86 segundos
+2025-10-20 18:19:15,233 - INFO - Total de registros processados: 1
+2025-10-20 18:27:31,586 - INFO - ================================================================================
+2025-10-20 18:27:31,587 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:27:31.586622
+2025-10-20 18:27:31,588 - INFO - ================================================================================
+2025-10-20 18:27:31,588 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:27:31,589 - INFO - {<classsProcessor_teste.Processor object at 0x0000016BD8D57770>}
+2025-10-20 18:27:31,590 - WARNING - 1
+2025-10-20 18:27:31,590 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:27:31,591 - WARNING - None
+2025-10-20 18:27:31,591 - INFO - Nenhum registro para processar
+2025-10-20 18:27:31,592 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:27:31,594 - INFO - Processamento concluído em 0.01 segundos
+2025-10-20 18:27:31,595 - INFO - Total de registros processados: 0
+2025-10-20 18:28:06,452 - INFO - ================================================================================
+2025-10-20 18:28:06,452 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:28:06.452010
+2025-10-20 18:28:06,453 - INFO - ================================================================================
+2025-10-20 18:28:06,454 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:28:06,454 - INFO - {<classsProcessor_teste.Processor object at 0x0000017AA26E38C0>}
+2025-10-20 18:28:06,455 - INFO - o que vem do self ACIMA
+2025-10-20 18:28:06,455 - WARNING - 1
+2025-10-20 18:28:06,456 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:28:06,456 - WARNING - None
+2025-10-20 18:28:06,456 - INFO - Nenhum registro para processar
+2025-10-20 18:28:06,457 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:28:06,459 - INFO - Processamento concluído em 0.01 segundos
+2025-10-20 18:28:06,459 - INFO - Total de registros processados: 0
+2025-10-20 18:30:59,480 - INFO - ================================================================================
+2025-10-20 18:30:59,482 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:30:59.480559
+2025-10-20 18:30:59,483 - INFO - ================================================================================
+2025-10-20 18:30:59,484 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:30:59,484 - INFO - {<conection.ConectionClass.DbConfig object at 0x000001E20B3678C0>}
+2025-10-20 18:30:59,485 - INFO - o que vem do self ACIMA
+2025-10-20 18:30:59,486 - WARNING - 1
+2025-10-20 18:30:59,487 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:30:59,488 - WARNING - None
+2025-10-20 18:30:59,490 - INFO - Nenhum registro para processar
+2025-10-20 18:30:59,491 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:30:59,493 - INFO - Processamento concluído em 0.01 segundos
+2025-10-20 18:30:59,496 - INFO - Total de registros processados: 0
+2025-10-20 18:33:42,472 - INFO - ================================================================================
+2025-10-20 18:33:42,473 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:33:42.472439
+2025-10-20 18:33:42,473 - INFO - ================================================================================
+2025-10-20 18:33:42,474 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:33:42,474 - INFO - {<conection.ConectionClass.DbConfig object at 0x000001FF7BE978C0>}
+2025-10-20 18:33:42,475 - INFO - o que vem do self ACIMA
+2025-10-20 18:33:43,193 - ERROR - Erro fatal na execução: module 'conection.ConectionClass' has no attribute 'RealDictCursor'
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 26, in executar
+    total_processados = processar_lote(self)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\process_lote.py", line 11, in processar_lote
+    registros = selecionar_teste(self)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\conection\busca_dados.py", line 68, in selecionar_teste
+    with conn.cursor(cursor_factory=ConectionClass.RealDictCursor) as cursor:
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'conection.ConectionClass' has no attribute 'RealDictCursor'
+2025-10-20 18:34:58,585 - INFO - ================================================================================
+2025-10-20 18:34:58,586 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:34:58.585916
+2025-10-20 18:34:58,587 - INFO - ================================================================================
+2025-10-20 18:34:58,587 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:34:58,588 - INFO - {<conection.ConectionClass.DbConfig object at 0x000001BEAD5A8050>}
+2025-10-20 18:34:58,588 - INFO - o que vem do self ACIMA
+2025-10-20 18:35:00,683 - INFO - Capturados 2 registros para processamento.
+2025-10-20 18:35:00,884 - WARNING - 1
+2025-10-20 18:35:00,885 - WARNING - recebo os dados vindo dao class Processor teste
+2025-10-20 18:35:00,887 - WARNING - [{'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998246, 'id_processo': 323, 'campo_aquisicao': '20865899649', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 37, 62568), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}, {'processo_id': 323, 'contrato': 417039, 'rede': 2620, 'codcns': 279665, 'nome_arquivo': 'poucas_linhas.csv', 'aceite_execucao': True, 'mensagem_alerta': None, 'data_cadastro': datetime.datetime(2025, 10, 20, 10, 22, 12, 361744), 'configuracao_json': '[{"plugin":360,"separar":false,"ocorrencias":1,"campos":[1,2,3]},{"plugin":9360,"separar":false,"ocorrencias":1,"campos":[1,2,3]}]', 'campos_aquisicao': '', 'loja': 134387, 'finalizado': False, 'data_finalizacao': None, 'pause': False, 'transacao_id': 2998247, 'id_processo': 323, 'campo_aquisicao': '06856600607', 'status': 4, 'sucesso': False, 'data_cadastro_transacao': datetime.datetime(2025, 10, 20, 11, 6, 37, 856342), 'resposta': None, 'resposta_json': 'RESPOSTA NAO OBTIDA'}]
+2025-10-20 18:35:00,903 - INFO - Iniciando processamento de 2 registros
+2025-10-20 18:35:00,906 - WARNING - proscore.com.br
+2025-10-20 18:35:00,908 - INFO - Lote processado com sucesso.
+2025-10-20 18:35:00,910 - INFO - ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2025-10-20 18:35:00,919 - INFO - Processamento concluído em 2.32 segundos
+2025-10-20 18:35:00,921 - INFO - Total de registros processados: 1
+2025-10-20 18:36:10,714 - INFO - ================================================================================
+2025-10-20 18:36:10,714 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:36:10.714126
+2025-10-20 18:36:10,715 - INFO - ================================================================================
+2025-10-20 18:36:10,853 - ERROR - Erro fatal na execução: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+Traceback (most recent call last):
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 466, in executar
+    total_processados = self.processar_lote()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 377, in processar_lote
+    registros = self.captura_registros()
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 130, in captura_registros
+    with DbConnect(self.config) as conn:
+         ~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\Users\proScore_25\Downloads\progestor_executa_consulta_proscore.py", line 54, in __enter__
+    self.connection = psycopg2.connect(
+                      ~~~~~~~~~~~~~~~~^
+        host=self.config.HOST,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        password=self.config.PASSWORD
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\proScore_25\AppData\Local\Programs\Python\Python313\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+2025-10-20 18:36:18,483 - INFO - ================================================================================
+2025-10-20 18:36:18,484 - INFO - Iniciando Progestor - Consulta Proscore - 2025-10-20 18:36:18.483252
+2025-10-20 18:36:18,484 - INFO - ================================================================================
+2025-10-20 18:36:18,485 - INFO - Iniciando processamento de lote (1 registros máx).
+2025-10-20 18:36:18,485 - INFO - {<conection.ConectionClass.DbConfig object at 0x000001CAD8F08050>}
+2025-10-20 18:36:18,485 - INFO - o que vem do self ACIMA
+2025-10-20 18:36:20,392 - ERROR - Erro fatal na execução: can only concatenate list (not "int") to list
+Traceback (most recent call last):
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\classsProcessor_teste.py", line 26, in executar
+    total_processados = processar_lote(self)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\process_lote.py", line 11, in processar_lote
+    registros = selecionar_teste(self)
+  File "C:\Users\proScore_25\OneDrive - Cheque-Pre.com Tecnologia da Informação Ltda\Área de Trabalho\Python-etl\conection\busca_dados.py", line 73, in selecionar_teste
+    classLogger.logger.info(f"Capturados {len(registros+2)} registros para processamento.")
+                                              ~~~~~~~~~^~
+TypeError: can only concatenate list (not "int") to list

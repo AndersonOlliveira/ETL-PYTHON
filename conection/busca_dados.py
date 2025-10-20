@@ -1,5 +1,11 @@
 from conection.conexao import conexao
 from tabulate import tabulate
+from typing import Dict, List, Optional, Tuple
+import classLogger 
+from conection import ConectionClass
+from psycopg2.extras import RealDictCursor
+
+
 import json
 
 def selecionar():
@@ -40,3 +46,29 @@ def selecionar():
         #    registros = [dict(zip(colunas, linha)) for linha in result_dados]
         #    print(json.dumps(registros, indent=4, ensure_ascii=False))
         #    return registros
+
+def selecionar_teste(self) -> List[Dict]: 
+         
+
+        classLogger.logger.info({self.config})
+        classLogger.logger.info('o que vem do self ACIMA')
+      
+        dados = ("""SELECT p.processo_id,
+                    p.contrato,p.rede,p.codcns,p.nome_arquivo,p.aceite_execucao,	
+                    p.mensagem_alerta,p.data_cadastro,p.configuracao_json,
+                    p.campos_aquisicao,p.loja,p.finalizado,p.data_finalizacao,p.pause,
+                    t.transacao_id,t.id_processo,t.campo_aquisicao,t.status,t.sucesso,
+	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
+                    FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
+                    WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
+                    p.pause = false AND p.error = false AND p.processo_id = 323
+            
+               ORDER BY random() limit 2;""")
+     
+     
+        with ConectionClass.DbConnect(self.config) as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute(dados, (self.batch_size,))
+                registros = cursor.fetchall()
+                classLogger.logger.info(f"Capturados {len(registros)} registros para processamento.")
+                return [dict(registro) for registro in registros]

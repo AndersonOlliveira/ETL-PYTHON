@@ -49,20 +49,29 @@ def main():
             #    print('já estou pegando o retorno')
                #print(reult_request)
                tratemento_reposta = respost_transfor(reult_request)
-            #    print('meu retorno do tramento da resposta')
-            #    print(tratemento_reposta)
+               print('meu retorno do tramento da resposta')
+               print(tratemento_reposta)
              
                new =[]
                for t in tratemento_reposta:
+                   if t.get('erro', True):
+                     t['status'] = 4
+                     t['sucesso'] = False
+
+                   else:
                      t['status'] = 2
                      t['sucesso'] = True
                      
-                     new.append(t.copy())
-                 
-               # print(new)  
+                  
+                  
+                   new.append(t.copy())
+                   
+                   
         result_dados = insertNewStatus(new)
+
+       
         
-        return f"Taregfa {result_campos} Concuido"       
+        return f"Taregfa {result_dados}, Concuido"       
                
                
                

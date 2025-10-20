@@ -94,7 +94,7 @@ def push_status_zero():
           return
       cursor = context_conection.cursor()
 
-      dados = ("""select lt.log_id, 
+      dados = ("""select DISTINCT ON( t.transacao_id) t.transacao_id as id_transacao, lt.log_id, 
                lt.id_processo from progestor.log_transacao as lt 
                LEFT JOIN progestor.transacao as t on (t.status = lt.status and t.status = 1 and t.id_processo = lt.id_processo) where  t.data_cadastro < now() - interval '30 minutes' limit 10;""")
       cursor.execute(dados)

@@ -16,14 +16,15 @@ def request_all(dados_):
 
     for index, row in dados_.iterrows():
         cpf = str(row[0]).strip()
-        print(f"➡️ Consultando CPF {index+1}/{len(dados_)}: {cpf}")
+        print(f" Consultando CPF {index+1}/{len(dados_)}: {cpf}")
 
         # Monta o dicionário base
         registro = {
             'processo_id': 309,
             'contrato': 417039,
             'rede': 2620,
-            'codcns': 270309,
+            'codcns': 279665, #360 E CLONE
+            # 'codcns': 270309,
             'nome_arquivo': arquivo_entrada,
             'aceite_execucao': True,
             'mensagem_alerta': None,
@@ -44,6 +45,7 @@ def request_all(dados_):
             'erro': False
         }
 
+    
         # Monta a URL da requisição
         servidor = "proscore.com.br" # link para do servidor
         url = (
@@ -58,17 +60,28 @@ def request_all(dados_):
 
         registro["url"] = url
 
-      
         try:
+            print(url)
             r = requests.get(url, timeout=300000)
             r.raise_for_status()
             resposta_texto = r.text.strip()
-
-            if not resposta_texto:
+                     
+            print("tenho a restosta da requisicao ANTES DA VALIDACAO")
+            print("=======inicio-----")
+            print(resposta_texto)
+            print("=======fim-----")
+            
+           
+            if not r.text.strip():
                 resposta_texto = "RESPOSTA NÃO OBITIDA"
                 registro["erro"] = True
+                registro["sucesso"] = False
+                print(f"tenho a restosta da requisicao DEPOIS DA VALIDACAO {resposta_texto}")
+               
             else:
                 registro["sucesso"] = True
+                print(f"PASSOU NA VERIFICACAO {resposta_texto}")
+               
 
         except Exception as e:
             resposta_texto = f"Erro: {e}"
@@ -78,7 +91,7 @@ def request_all(dados_):
         registro["resposta_json"] = resposta_texto
         resultados.append(registro)
 
-        # Pequena pausa para evitar bloqueio (opcional)
+      
         time.sleep(0.3)
 
     # Salva o resultado em CSV

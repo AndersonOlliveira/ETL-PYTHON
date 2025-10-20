@@ -23,17 +23,16 @@ def request_all(rows):
             f"progestor_prc={processo_id}&rde={rede}&rdelja={loja}"
             f"&ctr={contrato}&srvcns=1&tcnscod={codigo_cns}{parametros}"
         )
-
      
         erro = False
         resposta = ""
 
         try:
-            r = requests.get(url, timeout=3000)
+            r = requests.get(url, timeout=100)
             r.raise_for_status()
             resposta = r.text.strip()
 
-            if not resposta:
+            if not resposta or len(resposta) == 2:
                 resposta = "RESPOSTA NAO OBTIDA"
                 erro = True
 
@@ -41,7 +40,7 @@ def request_all(rows):
             resposta = f"Erro na requisição: {e}"
             erro = True
 
-        # Monta saída
+       
         row_up = registros.copy()
         row_up.update({
             "url": url,

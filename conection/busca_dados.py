@@ -14,12 +14,12 @@ def selecionar():
                     p.mensagem_alerta,p.data_cadastro,p.configuracao_json,
                     p.campos_aquisicao,p.loja,p.finalizado,p.data_finalizacao,p.pause,
                     t.transacao_id,t.id_processo,t.campo_aquisicao,t.status,t.sucesso,
-	                t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
+	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
                     WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false AND p.processo_id = 322
+                    p.pause = false AND p.error = false AND p.processo_id = 323
             
-               ORDER BY random() limit 10;""")
+               ORDER BY random() limit 2;""")
       cursor.execute(dados)
       result_dados = cursor.fetchall()
       if not result_dados:

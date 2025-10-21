@@ -51,6 +51,7 @@ def selecionar_teste(self) -> List[Dict]:
          
 
         classLogger.logger.info({self.config})
+        classLogger.logger.info({self.idProcesso})
         classLogger.logger.info('o que vem do self ACIMA')
       
         dados = ("""SELECT p.processo_id,
@@ -61,14 +62,14 @@ def selecionar_teste(self) -> List[Dict]:
 	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
                     WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false AND p.processo_id = 323
+                    p.pause = false AND p.error = false AND p.processo_id = %s
             
-               ORDER BY random() limit 2;""")
+               ORDER BY random() LIMIT %s;""")
      
      
         with ConectionClass.DbConnect(self.config) as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-                cursor.execute(dados, (self.batch_size,))
+                cursor.execute(dados, (self.idProcesso, self.batch_size,))
                 registros = cursor.fetchall()
                 classLogger.logger.info(f"Capturados {len(registros)} registros para processamento.")
                 return [dict(registro) for registro in registros]

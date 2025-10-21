@@ -1,5 +1,5 @@
 from conection.busca_dados import selecionar
-from tratamento.incia_process import prepara_campos
+from tratamento.prep_campos import prepara_campos
 from tratamento.resposta import respost_transfor
 from conection.transation_status import insert_transation
 from conection.transation_status import insertNewStatus

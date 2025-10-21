@@ -38,4 +38,3 @@ class DbConnect:
             elif exc_type is not None:
                 self.connection.rollback()
             self.connection.close()
-

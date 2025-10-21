@@ -2,6 +2,9 @@ from conection.conexao import conexao
 from tabulate import tabulate
 import time
 import json
+from typing import Dict, List, Optional, Tuple
+import classLogger
+import threading
 
 
 
@@ -133,4 +136,41 @@ def up_status_transaction(rows):
 
       return True
        
+
+def atualiza_status_processando(self,registro: Dict, cursor, connection):
+
+    classLogger.logger.warn('estou aquiiiiiiii')
+    classLogger.logger.warn(f"estou aquiiiiiiii {self.batch_counter_status1}")
+    classLogger.logger.warn(f"estou aquiiiiiiii {connection}")
+    classLogger.logger.warn(f"estou aquiiiiiiii {registro}")
+    # classLogger.logger.warn(f"estou aquiiiiiiii {connection}")
   
+
+    query = """
+           INSERT INTO progestor.log_transacao 
+               (id_processo, campo_aquisicao, status,resposta_json,sucesso)
+           VALUES 
+               (%s, %s, %s,%s,%s)
+       """
+    try:
+        cursor.execute(query, (
+            registro['processo_id'],
+            registro['campo_aquisicao'],
+            registro['new_status'],
+            registro['resposta_json'],
+            registro['sucesso']
+        ))
+     
+        classLogger.logger.info('Tentando adquirir o lock...') # Adicione este log
+        with self.lock:
+            classLogger.logger.info('tenho algo aqui depios do lock')
+            self.batch_counter_status1 += 1
+            classLogger.logger.info('Contador depois do incremento: %s', self.batch_counter_status1)
+            if self.batch_counter_status1 >= 1:
+               connection.commit()
+               self.batch_counter_status1 = 0
+
+               classLogger.logger.info(f"Status atualizado para 1 - Transação {registro.get('transacao_id')}")
+
+    except Exception as e:
+     classLogger.logger.error(f"Erro ao atualizar status para 1: {str(e)}")

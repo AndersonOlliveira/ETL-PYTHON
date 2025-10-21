@@ -1,5 +1,7 @@
 import json
 import re
+import classLogger
+from typing import Dict, List, Optional, Tuple
 
 def respost_transfor(dados):
     print(dados)
@@ -16,6 +18,21 @@ def respost_transfor(dados):
         new.append(registro.copy())
     
     return new
-    
-    
+
+
+
+
+
+def limpa_resposta_premium(self, registro: Dict) -> Dict:
+
+            resposta_premium = registro.get('resposta_json', '') or ''
+
+            resposta_premium = re.sub(r'\\n', '', resposta_premium)
+
+            registro['resposta_json'] = resposta_premium
+            registro['new_status'] = 2
+            registro['sucesso'] = True
+            classLogger.logger.debug(f"Resposta premium limpa: {resposta_premium[:100]}...")
+
+            return registro
     

@@ -6,10 +6,11 @@ from conection import ConectionClass
 
 
 class Processor:
-    def __init__(self, max_workers: int = 10, batch_size: int = 1000):
+    def __init__(self, max_workers: int = 10, batch_size: int = 1000,idProcesso: int =''):
         self.config = ConectionClass.DbConfig()
         self.max_workers = max_workers
         self.batch_size = batch_size
+        self.idProcesso = idProcesso
         self.servidor = 'proscore.com.br'
         self.batch_counter_status1 = 0
         self.batch_counter_status2 = 0
@@ -24,6 +25,8 @@ class Processor:
 
         try:
             total_processados = processar_lote(self)
+
+            classLogger.logger.info(f"minha quantidade de dados processados{total_processados}")
           
             fim = datetime.now()
             duracao = (fim - inicio).total_seconds()

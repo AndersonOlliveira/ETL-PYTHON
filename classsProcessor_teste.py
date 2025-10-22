@@ -2,11 +2,12 @@ import threading
 from datetime import datetime
 import classLogger
 from process_lote import processar_lote
+from process_status import processar_status
 from conection import ConectionClass
 
 
 class Processor:
-    def __init__(self, max_workers: int = 10, batch_size: int = 1000,idProcesso: int =''):
+    def __init__(self, max_workers: int = 10, batch_size: int = 1, idProcesso: int | None = None):
         self.config = ConectionClass.DbConfig()
         self.max_workers = max_workers
         self.batch_size = batch_size
@@ -18,22 +19,47 @@ class Processor:
         self.lock = threading.Lock()
 
     def executar(self):
-        inicio = datetime.now()
-        classLogger.logger.info("=" * 80)
-        classLogger.logger.info(f"Iniciando Progestor - Consulta Proscore - {inicio}")
-        classLogger.logger.info("=" * 80)
+        # inicio = datetime.now()
+        # classLogger.logger.info("=" * 80)
+        # classLogger.logger.info(f"Iniciando Progestor - Consulta Proscore - {inicio}")
+        # classLogger.logger.info("=" * 80)
 
-        try:
-            total_processados = processar_lote(self)
+        # try:
+        #     total_processados = processar_lote(self)
 
-            classLogger.logger.info(f"minha quantidade de dados processados{total_processados}")
+        #     classLogger.logger.info(f"minha quantidade de dados processados{total_processados}")
           
-            fim = datetime.now()
-            duracao = (fim - inicio).total_seconds()
+        #     fim = datetime.now()
+        #     duracao = (fim - inicio).total_seconds()
 
-            classLogger.logger.info("---" * 80)
-            classLogger.logger.info(f"Processamento concluído em {duracao:.2f} segundos")
-            classLogger.logger.info(f"Total de registros processados: {total_processados}")
+        #     classLogger.logger.info("---" * 80)
+        #     classLogger.logger.info(f"Processamento concluído em {duracao:.2f} segundos")
+        #     classLogger.logger.info(f"Total de registros processados: {total_processados}")
 
-        except Exception as e:
-            classLogger.logger.error(f"Erro fatal na execução: {str(e)}", exc_info=True)
+        # except Exception as e:
+        #     classLogger.logger.error(f"Erro fatal na execução: {str(e)}", exc_info=True)
+        pass
+    
+    def executar_finalizar(self):
+         
+          inicio = datetime.now()
+          classLogger.logger.info("=" * 80)
+          classLogger.logger.info(f"Iniciando Progestor - Mudar Status processo Proscore - {inicio}")
+          classLogger.logger.info("=" * 80)
+         
+          try:
+                total_processados = processar_status(self)
+
+                classLogger.logger.info(f"minha quantidade de dados processados{total_processados}")
+                
+                fim = datetime.now()
+                duracao = (fim - inicio).total_seconds()
+
+                classLogger.logger.info("---" * 80)
+                classLogger.logger.info(f"Processamento concluído em {duracao:.2f} segundos")
+                classLogger.logger.info(f"Total de registros processados: {total_processados}")
+
+          except Exception as e:
+                classLogger.logger.error(f"Erro fatal na execução: {str(e)}", exc_info=True)
+
+

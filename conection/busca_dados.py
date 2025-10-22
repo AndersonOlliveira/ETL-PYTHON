@@ -23,9 +23,9 @@ def selecionar():
 	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
                     WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false AND p.processo_id = 323
+                    p.pause = false AND p.error = false AND p.processo_id = 308
             
-               ORDER BY random() limit 2;""")
+               ORDER BY random() limit 4;""")
       cursor.execute(dados)
       result_dados = cursor.fetchall()
       if not result_dados:
@@ -52,9 +52,9 @@ def selecionar_teste(self) -> List[Dict]:
 
         classLogger.logger.info({self.config})
         classLogger.logger.info({self.idProcesso})
-        classLogger.logger.info('o que vem do self ACIMA')
+        classLogger.logger.info(f"tamanho da busca {self.batch_size}")
       
-        dados = ("""SELECT p.processo_id,
+        query = ("""SELECT p.processo_id,
                     p.contrato,p.rede,p.codcns,p.nome_arquivo,p.aceite_execucao,	
                     p.mensagem_alerta,p.data_cadastro,p.configuracao_json,
                     p.campos_aquisicao,p.loja,p.finalizado,p.data_finalizacao,p.pause,
@@ -62,14 +62,25 @@ def selecionar_teste(self) -> List[Dict]:
 	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
                     WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false AND p.processo_id = %s
+                    p.pause = false AND p.error = false """)
+        
+        params = []
+
+        if self.idProcesso is not None:
+         query += 'AND p.processo_id = %s'
+         params.append(self.idProcesso)
+                    
+        query += " ORDER BY random() LIMIT %s;";
+        params.append(self.batch_size)
+
             
-               ORDER BY random() LIMIT %s;""")
-     
+        classLogger.logger.info(query)
+        classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query}")
+        classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
      
         with ConectionClass.DbConnect(self.config) as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-                cursor.execute(dados, (self.idProcesso, self.batch_size,))
+                cursor.execute(query, tuple(params))
                 registros = cursor.fetchall()
                 classLogger.logger.info(f"Capturados {len(registros)} registros para processamento.")
                 return [dict(registro) for registro in registros]

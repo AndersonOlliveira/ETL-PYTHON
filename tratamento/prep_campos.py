@@ -57,51 +57,77 @@ def prepara_campos(rows):
 def set_campos_valores_aquisicao(registro: Dict) -> Tuple[Dict, bool]:
 
     linha = registro.get('campo_aquisicao', '') or ''  
-    linhas = '10676485774;10676485775;10676485776'
-
+    
     campos_aquisicao = registro.get('campos_aquisicao', '') or 'tcpfcnpj'
 
     classLogger.logger.warning(f"Campos aquisição: {campos_aquisicao}")
 
     campos = [c.strip() for c in campos_aquisicao.split(',')]
+   
     valores = [v.strip() for v in linha.split(';')]
-    valoress = [v.strip() for v in linhas.split(';')]
-
-    classLogger.logger.warning(f"Quantidade de valores: {len(valores)}")
-    classLogger.logger.warning(f"Quantidade de valores: {valores}")
-    classLogger.logger.warning(f"meus campos depois do split: {campos}")
-
+   
+    classLogger.logger.warning(f"Meus valores fora do split: {valores}")
+   
     erro = False
     parametros = ""
 
+  
+    dados_associados = {}
     try:
-        for i, (campo) in enumerate(campos):
-            if i < len(valoress):
+        for campo, valor in zip(campos, valores):
+            dados_associados[campo] = valor.strip()
+            
+            classLogger.logger.info(f"Associação inicial (zip): {dados_associados}")
+
+        # 2. LÓGICA DE CORREÇÃO PARA CASO DE UM ÚNICO VALOR (Inferência de CPF/CNPJ)
+        if len(valores) == 1:
+            valor_unico = valores[0].strip()
+            
+            # Checa se o único valor parece ser um CPF/CNPJ (11 ou 14 dígitos numéricos)
+            if valor_unico.isdigit() and len(valor_unico) in [11, 14]:
                 
-                valor = valoress[i]
-        
-            # valor = valor[i] if i < len(valor) else ""
-            classLogger.logger.info(f" meu enumerate :: {(valor)}")
-            classLogger.logger.info(f" meu campo {(campo)}")
-                    
-            if 'tcpfcnpj' in campo and len(valor) in [11,14]:
-                    parametros += f"&{'tcpfcnpj'}={valor}"
-                    classLogger.logger.info(f"CPF/CNPJ atribuído a {campo}: {valor}")
-                        
+                classLogger.logger.warning(
+                    f"Apenas um valor ({valor_unico}) foi enviado. "
+                    f"Forçando atribuição para 'tcpfcnpj' para pesquisa."
+                )
+                
+                # Limpa a atribuição incorreta feita pelo zip (ex: tmae -> 33289530604)
+                dados_associados.clear()
+                
+                # Atribui o valor correto ao campo essencial
+                dados_associados['tcpfcnpj'] = valor_unico
+                
+                classLogger.logger.info(f"Resultado corrigido: {dados_associados}")
+
             else:
-                    parametros += f"&{campo}={''}"
+                 classLogger.logger.info(
+                    "O número de valores é 1, mas não é um CPF/CNPJ. "
+                    "Mantendo atribuição original e não é possível pesquisar."
+                )
 
-                    classLogger.logger.info(f"Parâmetros finais: {parametros}")
-                    classLogger.logger.warning(f"Valor faltando para campo {campo} no registro {registro.get('transacao_id')}")
+        # 3. CONSTRUÇÃO DA STRING DE PARÂMETROS
+        # A string de parâmetros deve começar com o campo essencial (se existir)
+        # E só deve incluir campos que estão no dicionário (ou seja, que receberam um valor)
+        
+        for campo, valor in dados_associados.items():
+            # Limpa e sanitiza o valor (caso não tenha sido feito antes)
+            valor_limpo = valor.strip()
+            
+           
+            # Assumis a parte '&chave=valor'
+            parametros += f"&{campo}={valor_limpo}"
+            classLogger.logger.debug(f"Parâmetro adicionado: &{campo}={valor_limpo}")
+            
 
-        campo_aquisicao_limpo = re.sub(r'\|', ' ', linha)
+        # 4. REALIZA A ASSOCIACAO DOS DADOS
+        
+    
+        registro['parametros'] = parametros 
+       
+        registro['status'] = 1 if parametros else 0 
+        
+        classLogger.logger.info(f"Parâmetros finais gerados: {registro['parametros']}")
 
-        registro['parametros'] = parametros
-        registro['campo_aquisicao'] = campo_aquisicao_limpo
-        registro['erro'] = erro
-        registro['status'] = 0
-
-        classLogger.logger.debug(f"Parâmetros gerados: {parametros}")
 
     except Exception as e:
         classLogger.logger.error(f"Erro ao gerar parâmetros: {str(e)}")
@@ -111,4 +137,6 @@ def set_campos_valores_aquisicao(registro: Dict) -> Tuple[Dict, bool]:
         
         classLogger.logger.warn(f"meus parametros {registro}")
 
+
     return registro, erro
+

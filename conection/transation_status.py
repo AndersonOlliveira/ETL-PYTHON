@@ -3,9 +3,10 @@ from tabulate import tabulate
 import time
 import json
 from typing import Dict, List, Optional, Tuple
-import classLogger
 import threading
-
+import classLogger
+from conection import ConectionClass
+from psycopg2.extras import RealDictCursor
 
 
 def insert_transation(row):
@@ -174,3 +175,53 @@ def atualiza_status_processando(self,registro: Dict, cursor, connection):
 
     except Exception as e:
      classLogger.logger.error(f"Erro ao atualizar status para 1: {str(e)}")
+
+
+
+def process_status_five(self):
+      
+     classLogger.logger.warn('tenho dados')
+     
+
+     query_status = ("""SELECT DISTINCT (t.transacao_id) as id_transacao, lt.log_id, 
+               lt.id_processo from progestor.log_transacao as lt 
+               LEFT JOIN progestor.transacao as t on 
+               (t.status = lt.status and t.status = 5 and t.id_processo = lt.id_processo) 
+               where t.data_cadastro < now() - interval '30 minutes'    """)
+    
+     params = []
+
+     if self.idProcesso is not None:
+       query_status += ' AND t.id_processo = %s '
+       params.append(self.idProcesso)
+                              
+     query_status += " ORDER BY lt.id_processo LIMIT %s;";
+     params.append(self.batch_size)
+
+            
+     classLogger.logger.info(query_status)
+     classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query_status}")
+     classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
+     
+     with ConectionClass.DbConnect(self.config) as conn:
+             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute(query_status, tuple(params))
+                registros = cursor.fetchall()
+                classLogger.logger.info(f" Dados Capturados Status 5 {len(registros)} registros para processamento.")
+                return [dict(registro) for registro in registros]
+     
+     
+def set_campos_valores_aquisicao_status(self,status_registros):
+    
+          classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO    {status_registros}")
+          classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO  MEU SELF  {self}")
+    
+          cmd_update = """UPDATE progestor.transacao SET status = %s , sucesso = %s WHERE id_processo = %s and transacao_id = %s;"""
+          values = (status_registros['new_status'],status_registros['sucesso'],status_registros['id_processo'],status_registros['id_transacao'])
+          with ConectionClass.DbConnect(self.config) as conn:
+             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                  cursor.execute(cmd_update,values)
+                  conn.commit()
+          time.sleep(10)
+
+          return True          

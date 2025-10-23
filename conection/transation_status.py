@@ -140,12 +140,7 @@ def up_status_transaction(rows):
 
 def atualiza_status_processando(self,registro: Dict, cursor, connection):
 
-    classLogger.logger.warn('estou aquiiiiiiii')
-    classLogger.logger.warn(f"estou aquiiiiiiii {self.batch_counter_status1}")
-    classLogger.logger.warn(f"estou aquiiiiiiii {connection}")
-    classLogger.logger.warn(f"estou aquiiiiiiii {registro}")
-    # classLogger.logger.warn(f"estou aquiiiiiiii {connection}")
-  
+
 
     query = """
            INSERT INTO progestor.log_transacao 
@@ -162,19 +157,19 @@ def atualiza_status_processando(self,registro: Dict, cursor, connection):
             registro['sucesso']
         ))
      
-        classLogger.logger.info('Tentando adquirir o lock...') # Adicione este log
+      
         with self.lock:
-            classLogger.logger.info('tenho algo aqui depios do lock')
+          
             self.batch_counter_status1 += 1
-            classLogger.logger.info('Contador depois do incremento: %s', self.batch_counter_status1)
+           
             if self.batch_counter_status1 >= 1:
                connection.commit()
                self.batch_counter_status1 = 0
 
-               classLogger.logger.info(f"Status atualizado para 1 - Transação {registro.get('transacao_id')}")
+               classLogger.logger.info(f"Status atualizado para :: {registro.get('new_status')} - Transação {registro.get('transacao_id')}")
 
     except Exception as e:
-     classLogger.logger.error(f"Erro ao atualizar status para 1: {str(e)}")
+     classLogger.logger.error(f"Erro ao atualizar status para :: {registro.get('new_status')} - {str(e)}")
 
 
 
@@ -183,11 +178,9 @@ def process_status_five(self):
      classLogger.logger.warn('tenho dados')
      
 
-     query_status = ("""SELECT DISTINCT (t.transacao_id) as id_transacao, lt.log_id, 
-               lt.id_processo from progestor.log_transacao as lt 
-               LEFT JOIN progestor.transacao as t on 
-               (t.status = lt.status and t.status = 5 and t.id_processo = lt.id_processo) 
-               where t.data_cadastro < now() - interval '30 minutes'    """)
+     query_status = ("""SELECT DISTINCT (t.transacao_id) as id_transacao,t.id_processo
+                      FROM progestor.transacao as t 
+                      where t.status = 5  and t.data_cadastro < now() - interval '5 minutes'    """)
     
      params = []
 
@@ -195,7 +188,7 @@ def process_status_five(self):
        query_status += ' AND t.id_processo = %s '
        params.append(self.idProcesso)
                               
-     query_status += " ORDER BY lt.id_processo LIMIT %s;";
+     query_status += " ORDER BY t.transacao_id LIMIT %s;";
      params.append(self.batch_size)
 
             
@@ -211,17 +204,131 @@ def process_status_five(self):
                 return [dict(registro) for registro in registros]
      
      
-def set_campos_valores_aquisicao_status(self,status_registros):
-    
-          classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO    {status_registros}")
-          classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO  MEU SELF  {self}")
-    
-          cmd_update = """UPDATE progestor.transacao SET status = %s , sucesso = %s WHERE id_processo = %s and transacao_id = %s;"""
-          values = (status_registros['new_status'],status_registros['sucesso'],status_registros['id_processo'],status_registros['id_transacao'])
-          with ConectionClass.DbConnect(self.config) as conn:
-             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-                  cursor.execute(cmd_update,values)
-                  conn.commit()
-          time.sleep(10)
 
-          return True          
+def process_status_zero(self):
+      
+     classLogger.logger.warn('tenho dados')
+     
+
+     query_status = ("""SELECT DISTINCT (t.transacao_id) as id_transacao,t.id_processo
+                      FROM progestor.transacao as t 
+                      LEFT JOIN progestor.processo as p on (p.processo_id = t.id_processo and p.pause = false and p.error = false)
+                      where t.id_processo NOT IN (235,234,227,225) and t.status = 1  and t.data_cadastro < now() - interval '30 minutes'    """)
+    
+     params = []
+
+     if self.idProcesso is not None:
+       query_status += ' AND t.id_processo = %s '
+       params.append(self.idProcesso)
+                              
+     query_status += " ORDER BY t.transacao_id LIMIT %s;";
+     params.append(self.batch_size)
+
+            
+     classLogger.logger.info(query_status)
+     classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query_status}")
+     classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
+     
+     with ConectionClass.DbConnect(self.config) as conn:
+             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute(query_status, tuple(params))
+                registros = cursor.fetchall()
+                classLogger.logger.info(f" Dados Capturados Status 1 {len(registros)} registros para processamento.")
+                return [dict(registro) for registro in registros]
+     
+def up_status(self,status_registros:Dict, cursor,connection):
+    
+     # classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO    {status_registros}")
+     # classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO  MEU SELF  {self}")
+    
+     cmd_update = """UPDATE progestor.transacao SET 
+                  status = %s , sucesso = %s WHERE id_processo = %s and transacao_id = %s;"""
+         
+     try:
+          cursor.execute(cmd_update,(
+               status_registros['new_status'],
+               status_registros['sucesso'],
+               status_registros['id_processo'],
+               status_registros['id_transacao']
+          ))
+         
+          with self.lock:
+          #   classLogger.logger.info('Lock do up status')
+            self.batch_counter_status1 += 1
+          #   classLogger.logger.info('Contador depois do incremento do status: %s', self.batch_counter_status1)
+            if self.batch_counter_status1 >= 1:
+               connection.commit()
+               self.batch_counter_status1 = 0
+
+               classLogger.logger.info(f"Status atualizado para {status_registros.get('new_status')} - Transação {status_registros.get('id_transacao')}")
+
+     except Exception as e:
+      classLogger.logger.error(f"Erro ao atualizar status para 1: {str(e)}")
+        
+
+def process_finish_all(self):
+          
+     query = ("""SELECT p.processo_id,p.data_cadastro,p.data_finalizacao,
+               p.finalizado, 
+          p.data_cadastro + interval '3 days' < now() as iniciado_a_mais_de_tres_dias,
+               p.error,COUNT(t.transacao_id) AS qt_registros_total,
+               COALESCE(SUM(CASE WHEN t.status = 3 THEN 1 ELSE 0 END), 0) AS qt_registros_finalizados
+               FROM 
+               progestor.processo as p
+          LEFT JOIN progestor.transacao as t on (t.id_processo = p.processo_id)
+          WHERE 
+               (p.finalizado = false or p.finalizado is null) and
+               p.pause = false 
+          GROUP BY p.processo_id,	p.data_cadastro,p.data_finalizacao, p.finalizado,p.error
+          ORDER BY p.processo_id desc;""")
+               
+     params = []
+
+     # if self.idProcesso is not None:
+     #       query += ' AND t.id_processo = %s '
+     #       params.append(self.idProcesso)
+                              
+     # query += " ORDER BY t.transacao_id LIMIT %s;";
+     # params.append(self.batch_size)
+
+            
+     # classLogger.logger.info(query)
+     # classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query}")
+     # classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
+     
+     with ConectionClass.DbConnect(self.config) as conn:
+             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute(query, tuple(params))
+                registros = cursor.fetchall()
+                classLogger.logger.info(f" Dados Capturados do que esta em andamento {len(registros)} registros para processamento.")
+                return [dict(registro) for registro in registros]
+
+
+
+
+
+
+def up_finish_process(self, status_registros:Dict, cursor,connection):
+
+      
+     cmd_update = """UPDATE progestor.processo
+                     SET finalizado = %s, data_finalizacao = %s 
+                     WHERE processo_id = %s;"""
+                     
+     try:
+         cursor.execute(cmd_update,(
+              status_registros['new_status'],
+              status_registros['data_finalizacao'],
+              status_registros['processo_id'],
+         ))
+                     
+     
+             
+         with self.lock:
+             self.batch_counter_status1 += 1
+             
+         return status_registros 
+         
+     except Exception as e:
+         classLogger.logger.error(f"Erro ao gerar parâmetros: {str(e)}")
+         raise 

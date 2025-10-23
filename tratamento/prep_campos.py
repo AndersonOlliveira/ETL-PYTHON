@@ -1,6 +1,7 @@
 import re
 import classLogger
 from typing import Dict, List, Optional, Tuple
+from datetime import datetime
 
 def prepara_campos(rows):
     resultados = []
@@ -139,4 +140,45 @@ def set_campos_valores_aquisicao(registro: Dict) -> Tuple[Dict, bool]:
 
 
     return registro, erro
+
+
+
+
+ 
+def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
+     
+     erro = False
+     
+     inicio = registro['iniciado_a_mais_de_tres_dias']
+     
+     rTotal = registro['qt_registros_total']
+     
+     rFinalizado = registro['qt_registros_finalizados']
+
+                
+     try:
+         if rFinalizado == rTotal and rTotal > 0:
+            
+            registro['data_finalizacao'], registro['new_status'], registro['errors'] = datetime.now(),True,True
+            classLogger.logger.info(f"===" * 80)
+            classLogger.logger.info(f"REGISTRO  INSERIDO  rTotal={rTotal}, rFinalizado={rFinalizado} , o id {registro['processo_id']}")
+            classLogger.logger.info(f"====" * 80)
+         else:
+             erro = True
+             registro['erro'] = erro
+            
+            #  classLogger.logger.info(f"====" * 80)
+            #  classLogger.logger.info(f"REGISTRO NÃO FINALIZADO: rTotal={rTotal}, rFinalizado={rFinalizado} , o id {registro['processo_id']}")
+     
+     except Exception as e:
+            classLogger.logger.info(f"===" * 80)
+            classLogger.logger.error(f"Erro ao gerar parâmetros: {str(e)}")
+            erro = True
+            registro['erro'] = erro
+
+    
+     return registro, erro
+
+          
+
 

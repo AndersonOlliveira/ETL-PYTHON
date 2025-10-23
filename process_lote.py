@@ -16,9 +16,9 @@ def processar_lote(self):
     
     registros = selecionar_teste(self)
            
-    classLogger.logger.warn(self.batch_size)
-    classLogger.logger.warn('recebo os dados vindo dao class Processor teste')
-    classLogger.logger.warn(registros)
+    # classLogger.logger.warn(self.batch_size)
+    # classLogger.logger.warn('recebo os dados vindo dao class Processor teste')
+    # classLogger.logger.warn(registros)
     
     if not registros:
        classLogger.logger.info("Nenhum registro para processar")
@@ -37,7 +37,7 @@ def processar_lote(self):
              registro, erro_preparacao = set_campos_valores_aquisicao(registro)
 
              if not erro_preparacao:
-                #  classLogger.logger.info()
+              
                     #//* step 3
                   
                   registro['new_status'] = 1
@@ -53,7 +53,7 @@ def processar_lote(self):
          cursor_initil.close()
          time.sleep(0.5)
 
-    classLogger.logger.warn(f"Fase 1 concluída: {len(registros_preparados)} registros preparados e gravados com status 1")
+    classLogger.logger.warn(f"Fase 1 concluída: {len(registros_preparados)} ")
     
     total_processados = 0
     total_processados_info = 0

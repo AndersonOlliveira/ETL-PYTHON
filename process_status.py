@@ -2,7 +2,7 @@ import classLogger
 from conection.transation_status import process_status_five
 from conection import ConectionClass as classConection
 from tratamento.prep_campos import set_campos_valores_aquisicao
-from conection.transation_status import set_campos_valores_aquisicao_status
+from conection.transation_status import up_status
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from requestUrl.request_url import processar_request
 import psycopg2  
@@ -18,9 +18,9 @@ def processar_status(self):
       
      status_registros = process_status_five(self)
            
-     classLogger.logger.warn(self.batch_size)
-     classLogger.logger.warn('Recebo os dados e vou realizar para processar e atualizar')
-     classLogger.logger.warn(status_registros) 
+    #  classLogger.logger.warn(self.batch_size)
+    #  classLogger.logger.warn('Recebo os dados e vou realizar para processar e atualizar')
+    #  classLogger.logger.warn(status_registros) 
 
      if not status_registros:
        classLogger.logger.info("Nenhum registro para processar")
@@ -29,7 +29,7 @@ def processar_status(self):
      classLogger.logger.info(f"Iniciando processamento de status {len(status_registros)} registros")
 
      
-     registros_preparados = []
+     registros_up = []
      new_registros = []
 
      with classConection.DbConnect(self.config, auto_commit=False) as conn_status:
@@ -41,4 +41,13 @@ def processar_status(self):
 
           registro_status['new_status'], registro_status['sucesso'] = 3,True
          
-          registro_status, erro_preparacao = set_campos_valores_aquisicao_status(self,registro_status)
+          registro_status  = up_status(self,registro_status,cursor_initil, conn_status)
+          registros_up.append(registro_status)
+
+       
+         conn_status.commit()
+         cursor_initil.close()
+         time.sleep(0.5)
+ 
+     classLogger.logger.warn(f"Fase 2 concluída: {len(registros_up)} registros preparados e gravados com status 3 e salvo como sucesso True")
+    

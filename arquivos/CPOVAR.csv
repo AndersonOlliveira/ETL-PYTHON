@@ -1,0 +1,139 @@
+cpovar;cpodsc
+timg2                         ;Imagem 2                                                    
+tufmatchname                  ;UF                                                          
+tagn                          ;18 - AGENCIA                                                
+tbanco                        ;SELECIONE O BANCO                                           
+tendnumero                    ;NÚMERO                                                      
+tcrefazjson                   ;CREFAZ Json                                                 
+tnaturezainclusao             ;NATUREZA DA INCLUSÃO                                        
+documento_orgao_expedidor     ;Órgão Expedidor                                             
+tgrauinstr                    ;05 - GRAU DE INSTRUCAO                                      
+tendcep                       ;CEP                                                         
+tcpfcnpj                      ;01 - CPF/CNPJ                                               
+tenduf                        ;12 - ENDERECO UF                                            
+tendbairro                    ;BAIRRO                                                      
+tchqnom                       ;02 - NOME                                                   
+tcep                          ;13 - C.E.P                                                  
+cnh_descricao_situacao        ;Descrição Situação                                          
+tcepbanco                     ;BANCO (D)                                                   
+toabuf                        ;UF DO OAB                                                   
+tlongitude                    ;COORDENADA LONGITUDE                                        
+tcephospital                  ;LOCAL (C)                                                   
+cnh_registro_n_estrangeiro    ;Registro Nacional Estrangeiro                               
+tlogradouroend                ;ENDERECO                                                    
+tonetelecom_comp              ;04 - Complemento                                            
+tsiglaufend                   ;ESTADO (UF)                                                 
+tlidersinistronumsin          ;NÚMERO DO SINISTRO                                          
+tonetelecom_num               ;03 - Numero                                                 
+tdatnsc                       ;03 - DATA DE NASCIMENTO                                     
+tcepprocurador                ;LOCAL (E)                                                   
+bairro                        ;Bairro                                                      
+tdatacompra                   ;DATA DA COMPRA                                              
+tdatainicial                  ;1 - DATA INICIO NOTICIA                                     
+tonetelecom_cid               ;06 - Cidade                                                 
+ttotal_originado              ;TOTAL ORIGINADO                                             
+tnumtelcel                    ;TELEFONE FIXO/CELULAR                                       
+tnumeroprocesso               ;NUMERO DO PROCESSO                                          
+tpsqnom                       ;NOME:                                                       
+tdatavencimento               ;DATA DE VENCIMENTO                                          
+municipio                     ;Município                                                   
+sexo                          ;Sexo                                                        
+tendcompl                     ;09 - ENDERECO  COMPLEMENTO                                  
+tcepacidente                  ;LOCAL (A)                                                   
+tliderarrecadacaodatpag       ;DATA DO PAGAMENTO                                           
+tvideo                        ;Vídeo prova de vida formato base64                          
+tnumerodocodigo               ;Número do Código                                            
+tchavenotafiscal              ;Número da Chave                                             
+tlidersinistrobolocorr        ;BOLETIM OCORRÊNCIA                                          
+tonetelecom_log               ;02 - Logradouro                                             
+tcpfcnpjtelorb                ;STRING PARA CONSULTA                                        
+tbco                          ;17 - BANCO                                                  
+tliderarrecadacaocatvei       ;CATEGORIA DO VEÍCULO                                        
+temail                        ;06 - EMAIL                                                  
+timg1                         ;Imagem 1                                                    
+tvct                          ;VENCIMENTO                                                  
+tcepresidencia                ;LOCAL (B)                                                   
+toabins                       ;INSCRICAO DO OAB                                            
+documento_numero              ;Número Documento                                            
+tlidersinistrodadbancont      ;DADOS BANCÁRIOS (CONTA)                                     
+tcredcard                     ;19 - OPERADORA CARTAO DE CREDITO                            
+trazsocmatchname              ;RAZÃO SOCIAL                                                
+tlatitude                     ;COORDENADA LATITUDE                                         
+cnh_data_ultima_emissao       ;Data Última Emissão                                         
+tendufsintegra                ;UF                                                          
+tmatriz                       ;MATRIZ                                                      
+trazsoc                       ;RAZÃO                                                       
+tlidersinistrocrmmed          ;CRM MEDICO                                                  
+trenavam                      ;RENAVAM                                                     
+tplacaveic                    ;PLACA                                                       
+tonetelecom_cep               ;08 - CEP                                                    
+uf                            ;UF                                                          
+cep                           ;Cep                                                         
+ttpotit                       ;TIPO DE TITULO                                              
+tceptriangulacao              ;CEP                                                         
+tlidersinistrocepdele         ;CEP DA DELEGACIA                                            
+tnumtel                       ;14 - TELEFONE                                               
+tpartes                       ;PARTES                                                      
+tmotivoexclusao               ;MOTIVO DA EXCLUSÃO                                          
+tnumchassi                    ;CHASSI                                                      
+tmunicipioend                 ;MUNICIPIO                                                   
+tcepend                       ;CEP                                                         
+numero                        ;Número Endereço                                             
+tnumerocontrato               ;NÚMERO DO CONTRATO                                          
+ttipodevedor                  ;TIPO DE DEVEDOR                                             
+tnumtelcom                    ;16 - TELEFONE COMERCIAL                                     
+tnumchq                       ;NUMERO DO CHEQUE                                            
+nome_mae                      ;Nome da Mãe                                                 
+tcidmatchname                 ;CIDADE                                                      
+tprazo                        ;PRAZO                                                       
+tabcta                        ;DATA DE ABERTURA DA CONTA                                   
+tlidersinistroufmed           ;UF MÉDICO                                                   
+tlidersinistrocobert          ;COBERTURA                                                   
+tend                          ;07 - ENDERECO                                               
+tendcid                       ;11 - ENDERECO CIDADE                                        
+situacao_cpf                  ;Situação CPF                                                
+tlidersinistrodatacide        ;DATA DO ACIDENTE                                            
+tlidersinistrodadbancage      ;DADOS BANCÁRIOS (AGÊNCIA)                                   
+tsgno                         ;SIGNO                                                       
+tdateabertura                 ;DATA DE ABERTURA                                            
+tlocaltriangulacao            ;Local                                                       
+tchavepix                     ;CHAVE PIX                                                   
+tendnum                       ;08 - ENDERECO   NUMERO                                      
+tpai                          ;PAI                                                         
+tonetelecom_bai               ;05 - Bairro                                                 
+tie                           ;INSCRIÇÃO ESTADUAL                                          
+tlidersinistrocpfproc         ;CPF PROCURADOR                                              
+tendbro                       ;10 - ENDERECO BAIRRO                                        
+cnh_data_primeira_habilitacao ;Data Primeira Habilitação                                   
+ttitnum                       ;NUMERO DO TITULO                                            
+cnh_categoria                 ;Categoria                                                   
+tcnpjraiz                     ;CNPJ RAIZ                                                   
+tcpfrsdt                      ;21 - CPF DOS RESIDENTES                                     
+cnh_numero_registro           ;Número Registro                                             
+documento_tipo                ;Tipo                                                        
+tdatafinal                    ;2 - DATA FINAL NOTICIA                                      
+tlidersinistrodadbancbco      ;DADOS BANCÁRIOS (BANCO)                                     
+tposicaodedocorrespondente    ;Posição Dedo Correspondente                                 
+tlidersinistrocpfben          ;CPF DO BENIFICIÁRIO                                         
+tendlogradouro                ;LOGRADOURO                                                  
+nome_pai                      ;Nome do Pai                                                 
+tcelnum                       ;15 - CELULAR                                                
+tnumsegcnh                    ;NÚMERO DE SEGURANÇA DA CNH                                  
+complemento                   ;Complemento                                                 
+tmae                          ;MÃE                                                         
+tcta                          ;CONTA CORRENTE (COM DIGITO)                                 
+tantecriminal                 ;UF                                                          
+logradouro                    ;Logradouro                                                  
+tdatabase                     ;DATA-BASE                                                   
+tvlr                          ;VALOR                                                       
+tnumregcnh                    ;NÚMERO DE REGISTRO DA CNH                                   
+tnumerosresultados            ;NUMERO DE RESULTADOS                                        
+tfaturamento                  ;FATURAMENTO                                                 
+tdatfunda                     ;DATA FUNDAÇÃO                                               
+cnh_codigo_situacao           ;Código Situação                                             
+tsexo                         ;04 - SEXO                                                   
+cnh_data_validade             ;Data Validade                                               
+tonetelecom_est               ;07 - Estado                                                 
+trenda                        ;20 - RENDA MENSAL                                           
+tvalordebito                  ;VALOR DO DÉBITO                                             
+documento_uf_expedidor        ;UF Expedidor                                                

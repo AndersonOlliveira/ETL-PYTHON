@@ -18,9 +18,7 @@ def processar_status(self):
       
      status_registros = process_status_five(self)
            
-    #  classLogger.logger.warn(self.batch_size)
-    #  classLogger.logger.warn('Recebo os dados e vou realizar para processar e atualizar')
-    #  classLogger.logger.warn(status_registros) 
+     classLogger.logger.warn(f"Status 5 registros: {status_registros}") 
 
      if not status_registros:
        classLogger.logger.info("Nenhum registro para processar")
@@ -37,7 +35,7 @@ def processar_status(self):
 
          for registro_status in status_registros:
               #//* step 2
-          classLogger.logging.info(f'quais são os meu registros:  {registro_status}')
+          classLogger.logging.info(f'registros a ser atualizado:  {registro_status}')
 
           registro_status['new_status'], registro_status['sucesso'] = 3,True
          
@@ -50,4 +48,5 @@ def processar_status(self):
          time.sleep(0.5)
  
      classLogger.logger.warn(f"Fase 2 concluída: {len(registros_up)} registros preparados e gravados com status 3 e salvo como sucesso True")
-    
+  
+     return len(registros_up)

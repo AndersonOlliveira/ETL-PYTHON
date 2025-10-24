@@ -148,15 +148,32 @@ def set_campos_valores_aquisicao(registro: Dict) -> Tuple[Dict, bool]:
 def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
      
      erro = False
+     info_status = ''
+     qt_status = ''
      
      inicio = registro['iniciado_a_mais_de_tres_dias']
      
      rTotal = registro['qt_registros_total']
      
      rFinalizado = registro['qt_registros_finalizados']
+    
+     rErros = registro['qt_registros_erros']
 
                 
      try:
+              
+       
+         if inicio is True and rErros > 0:
+        #  if  rErros > 0:
+            classLogger.logger.info('==' * 80)
+            classLogger.logger.info(f'Ids status 7 encontrados :: {registro['processo_id']}')
+            info_status, qt_status = registro['processo_id'], rErros
+           
+            # registro['new_status'],  registro['sucesso'] = 3,True
+            # classLogger.logger.info(f"===" * 80)
+            # classLogger.logger.info(f"Registro a ser finalizado em transaco pois esta marcado iniciado a 3 dias e tem processos com status 7 transacao no id {registro['processo_id']}")
+        
+         
          if rFinalizado == rTotal and rTotal > 0:
             
             registro['data_finalizacao'], registro['new_status'], registro['errors'] = datetime.now(),True,True
@@ -177,7 +194,7 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
             registro['erro'] = erro
 
     
-     return registro, erro
+     return registro, erro, info_status, qt_status
 
           
 

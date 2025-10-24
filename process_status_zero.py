@@ -46,4 +46,5 @@ def processar_status_zero(self):
          time.sleep(0.5)
  
      classLogger.logger.warn(f"Fase 2 concluída: {len(registros_up_zero)} registros preparados e gravados com status 3 e salvo como sucesso True")
-    
+     
+     return len(registros_up_zero)

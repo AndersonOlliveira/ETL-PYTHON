@@ -47,7 +47,7 @@ def selecionar():
         #    print(json.dumps(registros, indent=4, ensure_ascii=False))
         #    return registros
 
-def selecionar_teste(self) -> List[Dict]: 
+def selecionar_all_dados(self) -> List[Dict]: 
          
 
         classLogger.logger.info({self.config})
@@ -74,8 +74,8 @@ def selecionar_teste(self) -> List[Dict]:
         params.append(self.batch_size)
 
             
-        classLogger.logger.info(query)
-        classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query}")
+        # classLogger.logger.info(query)
+        # classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query}")
         classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
      
         with ConectionClass.DbConnect(self.config) as conn:

@@ -1,5 +1,5 @@
 import classLogger
-from conection.busca_dados import selecionar, selecionar_teste
+from conection.busca_dados import selecionar, selecionar_all_dados
 from conection import ConectionClass as classConection
 from tratamento.prep_campos import set_campos_valores_aquisicao
 from conection.transation_status import atualiza_status_processando
@@ -14,7 +14,7 @@ def processar_lote(self):
     """
     classLogger.logger.info(f"Iniciando processamento de lote ({self.batch_size} registros máx).")
     
-    registros = selecionar_teste(self)
+    registros = selecionar_all_dados(self)
            
     # classLogger.logger.warn(self.batch_size)
     # classLogger.logger.warn('recebo os dados vindo dao class Processor teste')

@@ -5,8 +5,8 @@ import classLogger
 
 
 if __name__ == "__main__":
-    instance = Processor(max_workers=10, batch_size=2, idProcesso=337)
-    # instance = Processor(max_workers=10, batch_size=1)
+    # instance = Processor(max_workers=10, batch_size=2, idProcesso=337)
+    instance = Processor(max_workers=10, batch_size=75)
     tempo_espera_ciclo = 60  # Tempo de espera (em segundos) entre um ciclo e outro
     
     classLogger.logger.info(f"[{time.strftime('%H:%M:%S')}] Iniciando loop contínuo...")
@@ -27,5 +27,5 @@ if __name__ == "__main__":
             break
         except Exception as e:
             # Lida com erros inesperados e continua o loop
-            classLogger.logger.info("[{time.strftime('%H:%M:%S')}] Erro inesperado: {e}. Continuará em 30 segundos.")
+            classLogger.logger.info(f"[{time.strftime('%H:%M:%S')}] Erro inesperado: {e}. Continuará em 30 segundos.")
             time.sleep(tempo_espera_ciclo)

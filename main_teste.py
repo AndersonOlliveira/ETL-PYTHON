@@ -17,5 +17,5 @@ def teste():
 
 
 
-if __name__ == "__main__":
+ if __name__ == "__main__":
     teste(dados_)

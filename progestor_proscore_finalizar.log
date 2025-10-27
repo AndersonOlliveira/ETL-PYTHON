@@ -878,3 +878,263 @@
 2025-10-24 15:44:49,702 - INFO - progestor_proscore_finalizar - Quantidade:                0
 2025-10-24 15:44:49,703 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                0
 2025-10-24 15:44:49,704 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 09:59:23,976 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 09:59:23,990 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 09:59:23,991 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 09:59:23,992 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 09:59:20
+2025-10-27 09:59:23,993 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         2
+2025-10-27 09:59:23,994 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 09:59:23
+2025-10-27 09:59:24,000 - INFO - progestor_proscore_finalizar - Duração:                   3.27 segundos
+2025-10-27 09:59:24,001 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 09:59:24,002 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 09:59:43,994 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 09:59:44,001 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 09:59:44,003 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 09:59:44,005 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 09:59:35
+2025-10-27 09:59:44,008 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 09:59:43
+2025-10-27 09:59:44,010 - INFO - progestor_proscore_finalizar - Duração:                   8.57 segundos
+2025-10-27 09:59:44,011 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 09:59:44,013 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                2
+2025-10-27 09:59:44,015 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:00:54,696 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 10:00:54,702 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 10:00:54,702 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:00:54,705 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 10:00:44
+2025-10-27 10:00:54,709 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         2
+2025-10-27 10:00:54,711 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 10:00:54
+2025-10-27 10:00:54,711 - INFO - progestor_proscore_finalizar - Duração:                   10.68 segundos
+2025-10-27 10:00:54,712 - INFO - progestor_proscore_finalizar - Quantidade:                2
+2025-10-27 10:00:54,713 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:01:11,942 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 10:01:11,943 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 10:01:11,944 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:01:11,945 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 10:01:03
+2025-10-27 10:01:11,946 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 10:01:11
+2025-10-27 10:01:11,946 - INFO - progestor_proscore_finalizar - Duração:                   8.02 segundos
+2025-10-27 10:01:11,947 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 10:01:11,948 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                1
+2025-10-27 10:01:11,948 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:02:15,130 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 10:02:15,131 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 10:02:15,131 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:02:15,132 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 10:02:11
+2025-10-27 10:02:15,134 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         2
+2025-10-27 10:02:15,135 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 10:02:15
+2025-10-27 10:02:15,136 - INFO - progestor_proscore_finalizar - Duração:                   3.18 segundos
+2025-10-27 10:02:15,137 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 10:02:15,137 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:02:32,541 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 10:02:32,550 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 10:02:32,551 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 10:02:32,556 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 10:02:24
+2025-10-27 10:02:32,557 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 10:02:32
+2025-10-27 10:02:32,558 - INFO - progestor_proscore_finalizar - Duração:                   8.07 segundos
+2025-10-27 10:02:32,559 - INFO - progestor_proscore_finalizar - Quantidade:                1
+2025-10-27 10:02:32,560 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                0
+2025-10-27 10:02:32,561 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:18:00,081 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:18:00,082 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:18:00,083 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:18:00,087 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:16:22
+2025-10-27 14:18:00,088 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:18:00,089 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:18:00
+2025-10-27 14:18:00,096 - INFO - progestor_proscore_finalizar - Duração:                   97.40 segundos
+2025-10-27 14:18:00,098 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:18:00,099 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:19:37,149 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:19:37,151 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:19:37,152 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:19:37,168 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:19:25
+2025-10-27 14:19:37,170 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:19:37
+2025-10-27 14:19:37,173 - INFO - progestor_proscore_finalizar - Duração:                   11.97 segundos
+2025-10-27 14:19:37,176 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:19:37,177 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                6
+2025-10-27 14:19:37,178 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:22:46,679 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:22:46,685 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:22:46,686 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:22:46,687 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:20:37
+2025-10-27 14:22:46,688 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:22:46,690 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:22:46
+2025-10-27 14:22:46,691 - INFO - progestor_proscore_finalizar - Duração:                   129.49 segundos
+2025-10-27 14:22:46,693 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:22:46,697 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:24:23,534 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:24:23,535 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:24:23,536 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:24:23,537 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:24:12
+2025-10-27 14:24:23,546 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:24:23
+2025-10-27 14:24:23,548 - INFO - progestor_proscore_finalizar - Duração:                   11.00 segundos
+2025-10-27 14:24:23,548 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:24:23,549 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                5
+2025-10-27 14:24:23,550 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:26:55,673 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:26:55,674 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:26:55,675 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:26:55,676 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:25:23
+2025-10-27 14:26:55,679 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:26:55,679 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:26:55
+2025-10-27 14:26:55,680 - INFO - progestor_proscore_finalizar - Duração:                   92.11 segundos
+2025-10-27 14:26:55,681 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:26:55,684 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:28:32,587 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:28:32,592 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:28:32,599 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:28:32,602 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:28:21
+2025-10-27 14:28:32,606 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:28:32
+2025-10-27 14:28:32,613 - INFO - progestor_proscore_finalizar - Duração:                   11.54 segundos
+2025-10-27 14:28:32,616 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:28:32,617 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                6
+2025-10-27 14:28:32,618 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:31:19,174 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:31:19,176 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:31:19,191 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:31:19,194 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:29:32
+2025-10-27 14:31:19,195 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:31:19,196 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:31:19
+2025-10-27 14:31:19,207 - INFO - progestor_proscore_finalizar - Duração:                   106.55 segundos
+2025-10-27 14:31:19,209 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:31:19,211 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:33:05,417 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:33:05,422 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:33:05,425 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:33:05,432 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:32:49
+2025-10-27 14:33:05,433 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:33:05
+2025-10-27 14:33:05,434 - INFO - progestor_proscore_finalizar - Duração:                   16.27 segundos
+2025-10-27 14:33:05,439 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:33:05,445 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                6
+2025-10-27 14:33:05,446 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:35:58,252 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:35:58,254 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:35:58,254 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:35:58,259 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:34:05
+2025-10-27 14:35:58,267 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:35:58,270 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:35:58
+2025-10-27 14:35:58,271 - INFO - progestor_proscore_finalizar - Duração:                   112.80 segundos
+2025-10-27 14:35:58,273 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:35:58,283 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:37:28,446 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:37:28,447 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:37:28,447 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:37:28,448 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:37:16
+2025-10-27 14:37:28,449 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:37:28
+2025-10-27 14:37:28,451 - INFO - progestor_proscore_finalizar - Duração:                   11.80 segundos
+2025-10-27 14:37:28,451 - INFO - progestor_proscore_finalizar - Quantidade:                2
+2025-10-27 14:37:28,453 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                6
+2025-10-27 14:37:28,454 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:40:24,368 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:40:24,374 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:40:24,375 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:40:24,385 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:38:28
+2025-10-27 14:40:24,399 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:40:24,413 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:40:24
+2025-10-27 14:40:24,434 - INFO - progestor_proscore_finalizar - Duração:                   115.91 segundos
+2025-10-27 14:40:24,435 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:40:24,436 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:41:24,403 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:41:24,404 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:41:24,405 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:41:24,407 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:41:12
+2025-10-27 14:41:24,408 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:41:24
+2025-10-27 14:41:24,409 - INFO - progestor_proscore_finalizar - Duração:                   12.30 segundos
+2025-10-27 14:41:24,411 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:41:24,411 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                5
+2025-10-27 14:41:24,413 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:44:42,051 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:44:42,581 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:44:42,930 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:44:43,293 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:42:24
+2025-10-27 14:44:43,833 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:44:44,164 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:44:42
+2025-10-27 14:44:44,475 - INFO - progestor_proscore_finalizar - Duração:                   137.64 segundos
+2025-10-27 14:44:44,763 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:44:45,212 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:48:14,886 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:48:15,366 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:48:16,092 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:48:16,742 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:46:07
+2025-10-27 14:48:17,168 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:48:14
+2025-10-27 14:48:17,788 - INFO - progestor_proscore_finalizar - Duração:                   127.84 segundos
+2025-10-27 14:48:18,589 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:48:19,199 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                8
+2025-10-27 14:48:19,804 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:53:35,377 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:53:35,440 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:53:35,986 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:53:36,396 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:49:21
+2025-10-27 14:53:36,778 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:53:36,823 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:53:35
+2025-10-27 14:53:37,022 - INFO - progestor_proscore_finalizar - Duração:                   253.52 segundos
+2025-10-27 14:53:37,028 - INFO - progestor_proscore_finalizar - Quantidade:                75
+2025-10-27 14:53:37,030 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:54:34,776 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:54:34,786 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO
+2025-10-27 14:54:34,787 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:54:34,788 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:54:19
+2025-10-27 14:54:34,789 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:54:34
+2025-10-27 14:54:34,790 - INFO - progestor_proscore_finalizar - Duração:                   14.97 segundos
+2025-10-27 14:54:34,792 - INFO - progestor_proscore_finalizar - Quantidade:                0
+2025-10-27 14:54:34,793 - INFO - progestor_proscore_finalizar - Quantidade alter status seven:                6
+2025-10-27 14:54:34,794 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:56:22,323 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:56:22,324 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:56:22,325 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:56:22,326 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:55:34
+2025-10-27 14:56:22,327 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:56:22,327 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:56:22
+2025-10-27 14:56:22,328 - INFO - progestor_proscore_finalizar - Duração:                   47.52 segundos
+2025-10-27 14:57:37,188 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 14:57:37,189 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 14:57:37,189 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 14:57:37,190 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 14:57:22
+2025-10-27 14:57:37,191 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 14:57:37,191 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 14:57:37
+2025-10-27 14:57:37,192 - INFO - progestor_proscore_finalizar - Duração:                   14.86 segundos
+2025-10-27 15:55:23,830 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 15:55:23,837 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 15:55:23,847 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 15:55:23,859 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 15:54:57
+2025-10-27 15:55:23,864 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 15:55:23,870 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 15:55:23
+2025-10-27 15:55:23,875 - INFO - progestor_proscore_finalizar - Duração:                   26.09 segundos
+2025-10-27 15:58:18,679 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 15:58:18,691 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 15:58:18,705 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 15:58:18,711 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 15:56:23
+2025-10-27 15:58:18,712 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 15:58:18,713 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 15:58:18
+2025-10-27 15:58:18,717 - INFO - progestor_proscore_finalizar - Duração:                   114.79 segundos
+2025-10-27 15:59:22,803 - INFO - progestor_proscore_finalizar - 
+================================================================================
+2025-10-27 15:59:22,816 - INFO - progestor_proscore_finalizar - ESTATÍSTICAS DE EXECUÇÃO DE INSERIR PROCESSOS E REQUEST
+2025-10-27 15:59:22,820 - INFO - progestor_proscore_finalizar - ================================================================================
+2025-10-27 15:59:22,824 - INFO - progestor_proscore_finalizar - Início:                    2025-10-27 15:59:18
+2025-10-27 15:59:22,828 - INFO - progestor_proscore_finalizar - Quantidade Maxima:         75
+2025-10-27 15:59:22,829 - INFO - progestor_proscore_finalizar - Fim:                       2025-10-27 15:59:22
+2025-10-27 15:59:22,832 - INFO - progestor_proscore_finalizar - Duração:                   4.08 segundos

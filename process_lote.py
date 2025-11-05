@@ -44,6 +44,13 @@ def processar_lote(self):
                   registro['resposta_json'] = ''
                   registro['sucesso'] = False
                     # registro.update(registro.copy())
+                #   new_registros.append({
+                #     'id_processo' : registro['processo_id'],
+                #     'resposta_json': 'ERRO NO PROCESSAMENTO',
+                #     'new_status': 7,
+                #     'sucesso': False
+                # })
+                #   classLogger.logger.error(f"minha variavel teste {new_registros}")
 
                   atualiza_status_processando(self,registro, cursor_initil, conn_status)
                   registros_preparados.append(registro)
@@ -79,7 +86,7 @@ def processar_lote(self):
      
     with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = {
-                executor.submit(processar_request, self,registro, conn_status2, conn_status4): registro 
+                executor.submit(processar_request, self, registro, conn_status2, conn_status4): registro
                 for registro in registros_preparados
             }
             classLogger.logger.info(f"meus fature {futures}")

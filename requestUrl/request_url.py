@@ -3,6 +3,22 @@ from typing import Dict, List, Optional, Tuple
 import classLogger
 from conection.transation_status import atualiza_status_processando
 from tratamento.resposta import limpa_resposta_premium
+from conection.Conexao_Mongos import mongoConect
+from models.colletion_repository import Coletion
+import json
+import time
+conn = mongoConect()
+
+
+
+if conn:
+    db = conn.get_db_connection()
+    collection = db.get_collection(conn.get_db_colletion())
+    collection_json = db.get_collection(conn.get_db_colletion_json())
+    connection = db
+    print(f" Minha Collection: {collection_json.name}")
+    print(f"--"*20)
+    print(f"Conexao: {db}")
 
 
 def request(self, registro: Dict) -> Dict:
@@ -115,6 +131,10 @@ def request_all(rows):
 
 
 def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
+        # teste: dict = {}
+        new_array = {} 
+        #     teste: Dict[str, Any] = {}
+        classLogger.logger.info('ESTOU PASSANDO OS DADOS AQUI')
         try:
             cursor2 = conn_status2.cursor()
             cursor4 = conn_status4.cursor()
@@ -130,20 +150,56 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                 registro['resposta_json'] = 'ERRO NO PROCESSAMENTO'
                 registro['new_status'] = 7
                 registro['sucesso'] = False
+
+                new_array['id_processo'] = registro['processo_id']
+                new_array['resposta_json'] = 'ERRO NO PROCESSAMENTO'
+                new_array['new_status'] = 7
+                new_array['sucesso' ] = False
+                new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
+        
+                # [{'id_processo': 349, 'resposta_json': '{"registro":[{"numero_plugin":"150","nome_encontrado":"PRODUTORES ENERGETICOS DE MANSO S A PROMAN"},{"numero_plugin":"107","id_da_transacao":"912577177"}]}', 'new_status': 2, 'sucesso': True}]
+
+                classLogger.logger.error(f"ERRO PROCESSAMETO=>{new_array}")
                 atualiza_status_processando(self,registro, cursor4, conn_status4)
+                colletion_repository = Coletion(collection.name,db,collection_json.name)
+                # get_id = colletion_repository.insert_document(json.dumps(new_array))
+                get_id = colletion_repository.insert_document(new_array)
             else:
                 #//* step 5 e 6
-                registro = limpa_resposta_premium(self,registro)
+                registro , testeS = limpa_resposta_premium(self,registro)
+                
                 
                 atualiza_status_processando(self,registro, cursor2, conn_status2)
+                classLogger.logger.warning(f"MINHA VARIAVEL DE SUCESSO {testeS}")
+                colletion_repository = Coletion(collection.name,db,collection_json.name)
+                classLogger.logger.warning(f"*-*" * 5);
+                
+                get_id = colletion_repository.insert_document(testeS)
+                # get_id = colletion_repository.insert_document(json.dumps(testeS))
+              
+
                 
             cursor2.close()
             cursor4.close()
                 
         except Exception as e:
+            teste = Dict[List] = {}
+            classLogger.logger.error(f"VARIAVEL DE ERRO: {registro.get('transacao_id')}: {str(e)}")
             classLogger.logger.error(f"Erro inesperado ao processar registro {registro.get('transacao_id')}: {str(e)}")
             registro['erro'] = True
             registro['resposta_json'] = f"ERRO INESPERADO: {str(e)}"
+
+            teste['id_processo'] = registro['processo_id'],
+            teste['resposta_json'] = f"ERRO INESPERADO: {str(e)}",
+            teste['new_status'] =  7,
+            teste['erro' ] = True
+            teste['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
+        
+
             cursor4 = conn_status4.cursor()
+            classLogger.logger.error(f"VARIAVEL DE ERRO: {teste}")
             atualiza_status_processando(self,registro, cursor4, conn_status4)
+            colletion_repository = Coletion(collection.name,db,collection_json.name)
+            get_id = colletion_repository.insert_document(teste)
+            # get_id = colletion_repository.insert_document(json.dumps(teste))
             cursor4.close()

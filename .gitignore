@@ -1,3 +1,5 @@
 .env
 .vscode
 sftp.json
+venv
+.venv

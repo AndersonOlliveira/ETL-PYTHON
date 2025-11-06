@@ -38,9 +38,11 @@ def limpa_resposta_premium(self, registro: dict) -> tuple[dict, dict]:
 
             # preferir usar get para suportar ambos os nomes de campo
             teste['id_processo'] = registro.get('id_processo') or registro.get('processo_id')
+            teste['transacao_id'] = registro.get('transacao_id') or registro.get('transacao_id')
             teste['resposta_json'] = resposta_premium
             teste['new_status'] = 2
             teste['sucesso'] = True
+            teste['campo_aquisicao'] = registro.get('campo_aquisicao')
             teste['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
 
             classLogger.logger.error(f"Resposta premium limpa: {resposta_premium[:100]}...")

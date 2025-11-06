@@ -144,16 +144,22 @@ def atualiza_status_processando(self,registro: Dict, cursor, connection):
 
     query = """
            INSERT INTO progestor.log_transacao 
-               (id_processo, campo_aquisicao, status,resposta_json,sucesso)
+               (id_processo, campo_aquisicao, status,sucesso)
            VALUES 
-               (%s, %s, %s,%s,%s)
-       """
+               (%s, %s, %s,%s)  """
+
+     #   """  query = """
+     #       INSERT INTO progestor.log_transacao 
+     #           (id_processo, campo_aquisicao, status,resposta_json,sucesso)
+     #       VALUES 
+     #           (%s, %s, %s,%s,%s)
+     #   """
     try:
         cursor.execute(query, (
             registro['processo_id'],
             registro['campo_aquisicao'],
             registro['new_status'],
-            registro['resposta_json'],
+          #   registro['resposta_json'],
             registro['sucesso']
         ))
      
@@ -212,7 +218,7 @@ def process_status_zero(self):
 
      query_status = ("""SELECT  (t.transacao_id) as id_transacao,t.id_processo
                       FROM progestor.transacao as t 
-                      where t.id_processo NOT IN (235,234,227,225) and t.status in (1,7,6) and t.data_cadastro < now() - interval '30 minutes'    """)
+                      where t.id_processo NOT IN (235,234,227,225) and t.status in (1,7) and t.data_cadastro < now() - interval '30 minutes'    """)
     
      params = []
 

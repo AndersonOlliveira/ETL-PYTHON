@@ -342,6 +342,34 @@ def up_finish_process(self, status_registros:Dict, cursor,connection):
          raise 
 
 
+def up_status_process_seven(self, status_registros:Dict, cursor,connection):
+
+     classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO STATUS 7   {status_registros}")
+
+      
+     cmd_update = """UPDATE progestor.processo
+                     SET  data_finalizacao = %s, error = %s
+                     WHERE processo_id = %s;"""
+                     
+     try:
+         cursor.execute(cmd_update,(
+              time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+              True,
+              status_registros,
+         ))
+                     
+     
+             
+         with self.lock:
+             self.batch_counter_status1 += 1
+             
+         return status_registros 
+         
+     except Exception as e:
+         classLogger.logger.error(f"Erro ao gerar parâmetros: {str(e)}")
+         raise 
+
+
 
 def up_status_process(self,registros:Dict, cursor,connection):
      # REALIZO O UP SE TIVER MAIS DE 3 DIAS NO STATUS 7

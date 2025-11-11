@@ -150,6 +150,7 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
      erro = False
      info_status = ''
      qt_status = ''
+     finalizar = ''
      
      inicio = registro['iniciado_a_mais_de_tres_dias']
      
@@ -161,7 +162,12 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
 
                 
      try:
-              
+            
+         if rErros == rTotal:
+            classLogger.logger.info(f"IDs a ser finalizado se tiver o status 7: {registro['processo_id']} ")
+            finalizar = registro['processo_id']
+         
+
        
          if inicio is True and rErros > 0:
         #  if  rErros > 0:
@@ -194,7 +200,7 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
             registro['erro'] = erro
 
     
-     return registro, erro, info_status, qt_status
+     return registro, erro, info_status, qt_status, finalizar
 
           
 

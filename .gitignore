@@ -5,3 +5,4 @@ venv
 .venv
 progestor_proscore.log
 progestor_proscore
+.progestor_proscore

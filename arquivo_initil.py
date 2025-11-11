@@ -24,7 +24,7 @@ import classLogger
 #     print(f"Conexao: {db}")
 
 if __name__ == "__main__":
-    instance = Processor(max_workers=10, batch_size=10, idProcesso=353)
+    instance = Processor(max_workers=10, batch_size=10, idProcesso=370)
     # instance = Processor(max_workers=10, batch_size=3)
     tempo_espera_ciclo = 60  # Tempo de espera (em segundos) entre um ciclo e outro
     

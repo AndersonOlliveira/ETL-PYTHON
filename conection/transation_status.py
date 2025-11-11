@@ -286,6 +286,7 @@ def process_finish_all(self):
           WHERE 
                (p.finalizado = false or p.finalizado is null) and
                p.pause = false 
+                AND p.error = false
           GROUP BY p.processo_id,p.data_cadastro,p.data_finalizacao, p.finalizado,p.error
           HAVING COUNT(t.transacao_id) > 0  
           ORDER BY p.processo_id desc;""")

@@ -40,9 +40,9 @@ def processar_finish(self):
             
             #   classLogger.logger.warn(f'tennho os id do info: {info_status}')
               if finalizar:
-                     classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 7 : {finalizar}')
+                    classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 7 : {finalizar}')
 
-                     registros_up_seven.append(up_status_process_seven(self,finalizar,cursor_initil, conn_status))
+                    registros_up_seven.append(up_status_process_seven(self,finalizar,cursor_initil, conn_status))
               
               if  info_status:
                     classLogger.logger.info("==" * 80)

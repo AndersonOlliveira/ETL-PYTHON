@@ -197,11 +197,7 @@ def process_status_five(self):
      query_status += " ORDER BY random()  LIMIT %s;";
      params.append(self.batch_size)
 
-            
-     # classLogger.logger.info(query_status)
-     # classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query_status}")
-     # classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
-     
+          
      with ConectionClass.DbConnect(self.config) as conn:
              with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                 cursor.execute(query_status, tuple(params))
@@ -218,7 +214,7 @@ def process_status_zero(self):
 
      query_status = ("""SELECT  (t.transacao_id) as id_transacao,t.id_processo
                       FROM progestor.transacao as t 
-                      where t.id_processo NOT IN (235,234,227,225) and t.status in (1,7) and t.data_cadastro < now() - interval '30 minutes'    """)
+                      where t.id_processo NOT IN (235,234,227,225) and t.status in (1) and t.data_cadastro < now() - interval '30 minutes'    """)
     
      params = []
 
@@ -244,8 +240,6 @@ def process_status_zero(self):
 
 def up_status(self,status_registros:Dict, cursor,connection):
     
-     # classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO    {status_registros}")
-     # classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO  MEU SELF  {self}")
     
      cmd_update = """UPDATE progestor.transacao SET 
                   status = %s , sucesso = %s WHERE id_processo = %s and transacao_id = %s;"""

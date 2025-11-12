@@ -15,16 +15,12 @@ def processar_lote(self):
     classLogger.logger.info(f"Iniciando processamento de lote ({self.batch_size} registros máx).")
     
     registros = selecionar_all_dados(self)
-           
-    # classLogger.logger.warn(self.batch_size)
-    # classLogger.logger.warn('recebo os dados vindo dao class Processor teste')
-    # classLogger.logger.warn(registros)
-    
+               
     if not registros:
        classLogger.logger.info("Nenhum registro para processar")
        return 0
         
-    classLogger.logger.info(f"Iniciando processamento de {len(registros)} registros")
+    classLogger.logger.info(f"Iniciando processamento de : {len(registros)} registros")
 
     registros_preparados = []
     new_registros = []
@@ -43,15 +39,7 @@ def processar_lote(self):
                   registro['new_status'] = 1
                   registro['resposta_json'] = ''
                   registro['sucesso'] = False
-                    # registro.update(registro.copy())
-                #   new_registros.append({
-                #     'id_processo' : registro['processo_id'],
-                #     'resposta_json': 'ERRO NO PROCESSAMENTO',
-                #     'new_status': 7,
-                #     'sucesso': False
-                # })
-                #   classLogger.logger.error(f"minha variavel teste {new_registros}")
-
+               
                   atualiza_status_processando(self,registro, cursor_initil, conn_status)
                   registros_preparados.append(registro)
              else:
@@ -97,7 +85,7 @@ def processar_lote(self):
                     total_processados += 1
                     total_processados_info += 1
                 except Exception as e:
-                    classLogger.logger.info(f"meus fature sss{futures[future]}")
+                    classLogger.logger.info(f"meus fature {futures[future]}")
                     registro = futures[future]
                     classLogger.logger.error(f"Erro ao processar transação {registro.get('transacao_id')}: {str(e)}")
         

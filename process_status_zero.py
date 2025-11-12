@@ -16,9 +16,6 @@ def processar_status_zero(self):
       
      status_registros = process_status_zero(self)
            
-     classLogger.logger.warn(self.batch_size)
-     classLogger.logger.warn('Recebo os dados e vou realizar para processar e atualizar')
-     classLogger.logger.warn(status_registros) 
 
      if not status_registros:
        classLogger.logger.info("Nenhum registro para processar")

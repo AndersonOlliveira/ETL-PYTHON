@@ -32,7 +32,7 @@ class Processor:
         try:
             total_processados = processar_lote(self)
 
-            classLogger.logger.info(f"minha quantidade de dados processados{total_processados}")
+            classLogger.logger.info(f"minha quantidade de dados processados :  {total_processados}")
           
             fim = datetime.now()
             duracao = (fim - inicio).total_seconds()
@@ -56,11 +56,6 @@ class Processor:
                 classLogger.logger_finalizar.info(f"Fim:                       {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
                 classLogger.logger_finalizar.info(f"Duração:                   {duration:.2f} segundos")
                 classLogger.logger_finalizar.info(f"Quantidade:                {total_processados}")
-                # classLogger.logger.info(f"Linhas lidas:              {self.stats['lines_read']}")
-                # classLogger.logger.info(f"Linhas filtradas (não):    {self.stats['lines_filtered_out']}")
-                # classLogger.logger.info(f"Linhas atualizadas:        {self.stats['lines_updated']}")
-                # classLogger.logger.info(f"Linhas escritas:           {self.stats['lines_written']}")
-                # classLogger.logger.info(f"Erros:                     {self.stats['errors']}")
                 classLogger.logger_finalizar.info("=" * 80)
                  
         pass
@@ -94,7 +89,6 @@ class Processor:
           classLogger.logger.info("=" * 80)
           classLogger.logger.info(f"Iniciando Progestor - Mudar Status processo Proscore de 0 para 1- {inicio}")
           classLogger.logger.info("=" * 80)
-          classLogger.logger.info('ESTOU NO PRCOCESSO ZERO') 
           time.sleep(4)
      
           try:
@@ -116,25 +110,20 @@ class Processor:
     
     def executar_finalizar_process(self):
          
-        #   logger_finalizar.info('INCIO PROCESSO DE FINALIZAR')
+       
           inicio = datetime.now()
           classLogger.logger.info("=" * 80)
           classLogger.logger.info(f"Pegando Processo Progestor Finalizar, Processos Parados  - {inicio}")
           classLogger.logger.info("=" * 80)
           time.sleep(5)
           try:
-                total_processados_finalizado , total_alter_status_seven  = processar_finish(self)
+                total_processados_finalizado , total_alter_status_seven , total_seven_erros_up = processar_finish(self)
                 classLogger.logger.info(f"==" * 80)
-                classLogger.logger.info(f"minha quantidade de dados processados para ser Atualizado:  {total_processados_finalizado}")
                 
                 fim = datetime.now()
                 duracao = (fim - inicio).total_seconds()
 
-                classLogger.logger.info("---" * 80)
-                classLogger.logger.info(f"Processamento concluído em {duracao:.2f} segundos")
-                classLogger.logger.info(f"Total de registros processados Finalizado: {total_processados_finalizado}")
-                classLogger.logger.info(f"Total de registros Status Seven alterados: {total_alter_status_seven}")
-
+            
           except Exception as e:
                 classLogger.logger.error(f"Erro fatal na execução: {str(e)}", exc_info=True)
                 raise
@@ -144,18 +133,15 @@ class Processor:
                 duration = (end_time - inicio).total_seconds()
                     
                 classLogger.logger_finalizar.info("\n" + "=" * 80)
-                classLogger.logger_finalizar.info("ESTATÍSTICAS DE EXECUÇÃO")
+                classLogger.logger_finalizar.info("ESTATÍSTICAS DE EXECUÇÃO FINALIZAR PROCESS")
                 classLogger.logger_finalizar.info("=" * 80)
                 classLogger.logger_finalizar.info(f"Início:                    {inicio.strftime('%Y-%m-%d %H:%M:%S')}")
                 classLogger.logger_finalizar.info(f"Fim:                       {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
-                classLogger.logger_finalizar.info(f"Duração:                   {duration:.2f} segundos")
+                classLogger.logger_finalizar.info(f"Duração:                   {duracao:.2f} segundos")
                 classLogger.logger_finalizar.info(f"Quantidade:                {total_processados_finalizado}")
                 classLogger.logger_finalizar.info(f"Quantidade alter status seven:                {total_alter_status_seven}")
-                # classLogger.logger.info(f"Linhas lidas:              {self.stats['lines_read']}")
-                # classLogger.logger.info(f"Linhas filtradas (não):    {self.stats['lines_filtered_out']}")
-                # classLogger.logger.info(f"Linhas atualizadas:        {self.stats['lines_updated']}")
-                # classLogger.logger.info(f"Linhas escritas:           {self.stats['lines_written']}")
-                # classLogger.logger.info(f"Erros:                     {self.stats['errors']}")
+                # esta contagem e para contar quantos processo deram erro a consulta a api
+                classLogger.logger_finalizar.info(f"Quantidade de processos finalizado :                {total_seven_erros_up}")
                 classLogger.logger_finalizar.info("=" * 80)
                     
                 pass

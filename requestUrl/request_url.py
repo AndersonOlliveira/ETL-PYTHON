@@ -131,10 +131,10 @@ def request_all(rows):
 
 
 def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
-        # teste: dict = {}
+      
         new_array = {} 
-        #     teste: Dict[str, Any] = {}
-        classLogger.logger.info('ESTOU PASSANDO OS DADOS AQUI')
+        classLogger.logger.info('INICIO DO PROCESSAR REQUEST')
+      
         try:
             cursor2 = conn_status2.cursor()
             cursor4 = conn_status4.cursor()
@@ -157,12 +157,10 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                 new_array['sucesso' ] = False
                 new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
         
-                # [{'id_processo': 349, 'resposta_json': '{"registro":[{"numero_plugin":"150","nome_encontrado":"PRODUTORES ENERGETICOS DE MANSO S A PROMAN"},{"numero_plugin":"107","id_da_transacao":"912577177"}]}', 'new_status': 2, 'sucesso': True}]
-
-                classLogger.logger.error(f"ERRO PROCESSAMETO=>{new_array}")
+                
                 atualiza_status_processando(self,registro, cursor4, conn_status4)
                 colletion_repository = Coletion(collection.name,db,collection_json.name)
-                # get_id = colletion_repository.insert_document(json.dumps(new_array))
+               
                 get_id = colletion_repository.insert_document(new_array)
             else:
                 #//* step 5 e 6
@@ -170,13 +168,12 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                 
                 
                 atualiza_status_processando(self,registro, cursor2, conn_status2)
-                classLogger.logger.warning(f"MINHA VARIAVEL DE SUCESSO {testeS}")
+               
                 colletion_repository = Coletion(collection.name,db,collection_json.name)
                 classLogger.logger.warning(f"*-*" * 5);
                 
                 get_id = colletion_repository.insert_document(testeS)
-                # get_id = colletion_repository.insert_document(json.dumps(testeS))
-              
+               
 
                 
             cursor2.close()
@@ -184,7 +181,6 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                 
         except Exception as e:
             teste = Dict[List] = {}
-            classLogger.logger.error(f"VARIAVEL DE ERRO: {registro.get('transacao_id')}: {str(e)}")
             classLogger.logger.error(f"Erro inesperado ao processar registro {registro.get('transacao_id')}: {str(e)}")
             registro['erro'] = True
             registro['resposta_json'] = f"ERRO INESPERADO: {str(e)}"
@@ -197,9 +193,7 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
         
 
             cursor4 = conn_status4.cursor()
-            classLogger.logger.error(f"VARIAVEL DE ERRO: {teste}")
             atualiza_status_processando(self,registro, cursor4, conn_status4)
             colletion_repository = Coletion(collection.name,db,collection_json.name)
             get_id = colletion_repository.insert_document(teste)
-            # get_id = colletion_repository.insert_document(json.dumps(teste))
             cursor4.close()

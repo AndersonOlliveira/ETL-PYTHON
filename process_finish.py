@@ -40,14 +40,14 @@ def processar_finish(self):
             
             #   classLogger.logger.warn(f'tennho os id do info: {info_status}')
               if finalizar:
+                    # IS PARA FINALIZAR SE TODOS FOREM 7 MARCA COMO ERRO PROCESS
                     classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 7 : {finalizar}')
 
                     registros_up_seven.append(up_status_process_seven(self,finalizar,cursor_initil, conn_status))
               
               if  info_status:
                     classLogger.logger.info("==" * 80)
-                    # classLogger.logger.info(f"Info dos id dos processos com status 7 a mais de 3 dias ")
-                    # classLogger.logger.info(f"ids:: {info_status}")
+                   
                     new_registros.append(up_status_process(self,info_status,cursor_initil, conn_status))
 
                     classLogger.logger.info(f"==" * 80)

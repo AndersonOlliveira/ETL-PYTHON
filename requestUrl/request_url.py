@@ -19,16 +19,22 @@ if conn:
     print(f" Minha Collection: {collection_json.name}")
     print(f"--"*20)
     print(f"Conexao: {db}")
+    
 
 
 def request(self, registro: Dict) -> Dict:
+        
+        print(f"MEUS REGISTROS: {registro}")
+        dados_plugin = False
 
         rede = str(registro['rede'])
-        loja = str(registro['loja'])
+        loja = str(registro['lj'])
         contrato = str(registro['contrato'])
         codigo_cns = str(registro['codcns'])
         processo_id = str(registro['processo_id'])
         parametros = registro.get('parametros', '')
+
+        classLogger.logger.info(f"minha rede de loja {loja}")
 
         url = (
             f"https://{self.servidor}/cns/json.chp?"
@@ -63,14 +69,46 @@ def request(self, registro: Dict) -> Dict:
                 resposta = f"ERRO: {str(e)}"
                 erro = True
                 classLogger.logger.error(f"Erro na requisição: {str(e)}")
+                # ajuste neste local
 
-        if not resposta or resposta.strip() == "" or len(resposta) == 2:
+        classLogger.logger.error(f"MINHA RESPOSTA TEM O QUE? {resposta}")
+        # if not resposta or resposta.strip() == "" or len(resposta) == 2:
+        if  resposta.strip() == "" or len(resposta) == 2:
             resposta = "RESPOSTA NAO OBTIDA"
             erro = True
+        else:
+        
+          try:
+               dados = json.loads(resposta)
+               lista_registros = dados.get("registro", [])
 
-        registro['url'] = url
-        registro['resposta_json'] = resposta
-        registro['erro'] = erro
+               contador_total = len(lista_registros)
+               contador_plugin_9 = sum(
+               1 for item in lista_registros
+               if item.get("numero_plugin") == "9")
+               for item in lista_registros:
+                    print(f"Plugin: {item.get('numero_plugin')}")
+                    print(f"Código: {item.get('codigo_da_mensagem')}")
+                    print(f"Descrição: {item.get('descricao_da_mensagem')}")
+                    print("----")
+
+               print(f"Total de retornos: {contador_total}")
+               print(f"Total plugin 9: {contador_plugin_9}")
+
+       
+               if contador_total > 0 and contador_plugin_9 == contador_total:
+                   erro = True
+                   dados_plugin = True
+          except json.JSONDecodeError:
+               resposta = "RESPOSTA INVALIDA — NÃO É UM JSON"
+               erro = True
+        
+        registro["url"] = url
+        registro["resposta_json"] = resposta
+        registro["erro"] = erro
+        registro["puglin"] = dados_plugin
+
+        print(f"meu registro final: {registro}")
 
         return registro
 
@@ -133,6 +171,7 @@ def request_all(rows):
 def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
       
         new_array = {} 
+
         classLogger.logger.info('INICIO DO PROCESSAR REQUEST')
       
         try:
@@ -144,41 +183,50 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
 
             classLogger.logger.warn(registro)
 
-            #//* step 5 e 6 ou 7
-            if registro['erro']:
-                #//* step 7
-                registro['resposta_json'] = 'ERRO NO PROCESSAMENTO'
-                registro['new_status'] = 7
-                registro['sucesso'] = False
+            if registro["erro"] and registro["puglin"]:
+                # ERRO DO PLUGIN 9
+                status = 7
+                resposta_json = registro["resposta_json"]
+                sucesso = False
 
-                new_array['id_processo'] = registro['processo_id']
-                new_array['resposta_json'] = 'ERRO NO PROCESSAMENTO'
-                new_array['new_status'] = 7
-                new_array['sucesso' ] = False
-                new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
-        
-                
-                atualiza_status_processando(self,registro, cursor4, conn_status4)
-                colletion_repository = Coletion(collection.name,db,collection_json.name)
+            elif registro["erro"]:
                
-                get_id = colletion_repository.insert_document(new_array)
+                status = 4
+                resposta_json = "RESPOSTA NÃO OBTIDA"
+                sucesso = False
+
             else:
-                #//* step 5 e 6
-                registro , testeS = limpa_resposta_premium(self,registro)
-                
-                
-                atualiza_status_processando(self,registro, cursor2, conn_status2)
-               
-                colletion_repository = Coletion(collection.name,db,collection_json.name)
-                classLogger.logger.warning(f"*-*" * 5);
-                
-                get_id = colletion_repository.insert_document(testeS)
-               
+                # SUCESSO
+                registro, testeS = limpa_resposta_premium(self, registro)
+                status = registro.get("new_status", 2)
+                resposta_json = registro["resposta_json"]
+                sucesso = True
 
-                
+
+            # Mapeia dados para salvar
+            new_array["id_processo"] = registro["processo_id"]
+            new_array["resposta_json"] = resposta_json
+            new_array["new_status"] = status
+            new_array["sucesso"] = sucesso
+            new_array["time"] = time.strftime("t%Y-%m-%d %H:%M:%S")
+
+            # Atualiza status
+            if sucesso:
+                atualiza_status_processando(self, registro, cursor2, conn_status2)
+            else:
+                atualiza_status_processando(self, registro, cursor4, conn_status4)
+
+            # Salva no MongoDB
+            colletion_repository = Coletion(collection.name, db, collection_json.name)
+
+            if sucesso:
+                get_id = colletion_repository.insert_document(testeS)
+            else:
+                get_id = colletion_repository.insert_document(new_array)
+
             cursor2.close()
             cursor4.close()
-                
+                            
         except Exception as e:
             teste = Dict[List] = {}
             classLogger.logger.error(f"Erro inesperado ao processar registro {registro.get('transacao_id')}: {str(e)}")

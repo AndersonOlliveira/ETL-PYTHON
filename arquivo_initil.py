@@ -4,8 +4,8 @@ from threading import Timer
 import classLogger
 
 if __name__ == "__main__":
-    instance = Processor(max_workers=10, batch_size=2, idProcesso=372)
-    # instance = Processor(max_workers=10, batch_size=3)
+    # instance = Processor(max_workers=10, batch_size=10, idProcesso=421)
+    instance = Processor(max_workers=10, batch_size=10)
     tempo_espera_ciclo = 60  # Tempo de espera (em segundos) entre um ciclo e outro
     
     classLogger.logger.info(f"[{time.strftime('%H:%M:%S')}] Iniciando loop contínuo...")

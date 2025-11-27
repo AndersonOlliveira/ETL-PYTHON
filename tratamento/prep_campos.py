@@ -17,9 +17,17 @@ def prepara_campos(rows):
      #    print(f"\nRecebido campo_aquisicao: {linha}")
      #    print(f"Campos de aquisição: {campos_aquisicao}")
 
+
+     
+     #COLOCAR UMA REGRA PARA O CAMPO QUE FOR NULL DE ACORDO COM O CAMPO DE AQUISICAO PARA ELE SALVAR OS DADOS
+
+
+
     
         campos = campos_aquisicao.split(",")
         valores = linha.split(";")
+        
+        
 
         erro = False
         parametros = ""
@@ -29,6 +37,7 @@ def prepara_campos(rows):
             cAquisicao = campos[i].strip()
             valor = valores[i].strip()
             try:
+             
                 parametros += f"&{cAquisicao}={valor}"
             except Exception as e:
                 erro = True

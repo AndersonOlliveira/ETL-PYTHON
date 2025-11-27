@@ -57,11 +57,11 @@ def selecionar_all_dados(self) -> List[Dict]:
         query = ("""SELECT p.processo_id,
                     p.contrato,p.rede,p.codcns,p.nome_arquivo,p.aceite_execucao,	
                     p.mensagem_alerta,p.data_cadastro,p.configuracao_json,
-                    p.campos_aquisicao,p.loja,p.finalizado,p.data_finalizacao,p.pause,
+                    p.campos_aquisicao,p.loja as lj,p.finalizado,p.data_finalizacao,p.pause,
                     t.transacao_id,t.id_processo,t.campo_aquisicao,t.status,t.sucesso,
 	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
-                    WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
+                    WHERE t.status in (0,1,4) AND (p.finalizado = false OR p.finalizado is null) AND 
                     p.pause = false AND p.error = false """)
         
         params = []

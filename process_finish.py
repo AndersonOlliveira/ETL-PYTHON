@@ -36,14 +36,20 @@ def processar_finish(self):
          for  registro_status in status_registros:
               #//* step 2
              
-              registro_status, erro_preparacao , info_status,qt_status,finalizar = set_campos_valores_finish(registro_status)
+              registro_status, erro_preparacao , info_status,qt_status,finalizar , finaliza_Resp = set_campos_valores_finish(registro_status)
             
             #   classLogger.logger.warn(f'tennho os id do info: {info_status}')
-              if finalizar:
+              if finalizar or finaliza_Resp:
                     # IS PARA FINALIZAR SE TODOS FOREM 7 MARCA COMO ERRO PROCESS
                     classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 7 : {finalizar}')
+                    classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 8 : {finaliza_Resp}')
 
-                    registros_up_seven.append(up_status_process_seven(self,finalizar,cursor_initil, conn_status))
+                    if finaliza_Resp:
+                          registros_up_seven.append(up_status_process_seven(self,finaliza_Resp,cursor_initil, conn_status))
+
+                    else:  
+                         
+                         registros_up_seven.append(up_status_process_seven(self,finalizar,cursor_initil, conn_status))
               
               if  info_status:
                     classLogger.logger.info("==" * 80)

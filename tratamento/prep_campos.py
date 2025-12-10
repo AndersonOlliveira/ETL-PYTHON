@@ -160,6 +160,7 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
      info_status = ''
      qt_status = ''
      finalizar = ''
+     finaliza_Resp = ''
      
      inicio = registro['iniciado_a_mais_de_tres_dias']
      
@@ -169,16 +170,23 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
     
      rErros = registro['qt_registros_erros']
 
+     rErrosResposta = registro['qt_registros_erros_resposta']
+
                 
      try:
             
-         if rErros == rTotal:
+        if rErros == rTotal:
             classLogger.logger.info(f"IDs a ser finalizado se tiver o status 7: {registro['processo_id']} ")
             finalizar = registro['processo_id']
+            
+      
+        if rErrosResposta == rTotal:
+            classLogger.logger.info(f"IDs a ser finalizado se tiver o status 8: {registro['processo_id']} ")
+            finaliza_Resp = registro['processo_id']
          
 
        
-         if inicio is True and rErros > 0:
+        if inicio is True and rErros > 0:
         #  if  rErros > 0:
             classLogger.logger.info('==' * 80)
             classLogger.logger.info(f'Ids status 7 encontrados :: {registro['processo_id']}')
@@ -189,13 +197,13 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
             # classLogger.logger.info(f"Registro a ser finalizado em transaco pois esta marcado iniciado a 3 dias e tem processos com status 7 transacao no id {registro['processo_id']}")
         
          
-         if rFinalizado == rTotal and rTotal > 0:
+        if rFinalizado == rTotal and rTotal > 0:
             
             registro['data_finalizacao'], registro['new_status'], registro['errors'] = datetime.now(),True,True
             classLogger.logger.info(f"===" * 80)
             classLogger.logger.info(f"REGISTRO  INSERIDO  rTotal={rTotal}, rFinalizado={rFinalizado} , o id {registro['processo_id']}")
             classLogger.logger.info(f"====" * 80)
-         else:
+        else:
              erro = True
              registro['erro'] = erro
             
@@ -209,7 +217,7 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
             registro['erro'] = erro
 
     
-     return registro, erro, info_status, qt_status, finalizar
+     return registro, erro, info_status, qt_status, finalizar, finaliza_Resp
 
           
 

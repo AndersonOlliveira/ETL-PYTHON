@@ -178,6 +178,67 @@ def atualiza_status_processando(self,registro: Dict, cursor, connection):
      classLogger.logger.error(f"Erro ao atualizar status para :: {registro.get('new_status')} - {str(e)}")
 
 
+# grava no banco a resposta com o erro do puglin
+def atualiza_status_processando_seven(self,registro: Dict, cursor, connection):
+    
+          mensagens_concat = ''
+          json_resposta = registro['resposta_json']
+          try:
+               dados = json.loads(json_resposta)
+               lista_registros = dados.get("registro", [])
+               if lista_registros:
+                  print(f'SAIU AQUI')
+                  
+                  mensagens_concat = "; ".join(f"[{item.get('codigo_da_mensagem')}] {item.get('descricao_da_mensagem')}"
+                                       for item in lista_registros)
+               else:
+                   
+                  print(f"TENHO A RESPOSTA")
+                  mensagens_concat = registro['resposta_json']
+
+          except Exception as e:
+                print("Erro ao abrir JSON:", e)
+                mensagens_concat = json_resposta
+              
+          
+         
+         
+          print(f"Mensagens concatenadas:")
+          # print(f"Mensagens concatenadas: {registro['resposta_json']}")
+          print(mensagens_concat)
+
+     
+          query = """
+               INSERT INTO progestor.log_transacao 
+                    (id_processo, campo_aquisicao, status,sucesso,resposta)
+               VALUES 
+                    (%s, %s, %s,%s,%s)  """
+
+     
+          try:
+               cursor.execute(query, (
+               registro['processo_id'],
+               registro['campo_aquisicao'],
+               registro['new_status'],
+               registro['sucesso'],
+               mensagens_concat
+            ))
+          
+          
+               with self.lock:
+                    
+                    self.batch_counter_status1 += 1
+                    
+                    if self.batch_counter_status1 >= 1:
+                         connection.commit()
+                         self.batch_counter_status1 = 0
+
+                         classLogger.logger.info(f"Status atualizado para :: {registro.get('new_status')} - Transação {registro.get('transacao_id')}")
+
+          except Exception as e:
+           classLogger.logger.error(f"Erro ao atualizar status para :: {registro.get('new_status')} - {str(e)}")
+
+
 
 def process_status_five(self):
       
@@ -186,7 +247,7 @@ def process_status_five(self):
 
      query_status = ("""SELECT  (t.transacao_id) as id_transacao,t.id_processo
                       FROM progestor.transacao as t 
-                      where t.id_processo NOT IN (235,234,227,225) and t.status = 5  and t.data_cadastro < now() - interval '30 minutes'    """)
+                      where t.status = 5  and t.data_cadastro < now() - interval '30 minutes'    """)
     
      params = []
 
@@ -214,7 +275,7 @@ def process_status_zero(self):
 
      query_status = ("""SELECT  (t.transacao_id) as id_transacao,t.id_processo
                       FROM progestor.transacao as t 
-                      where t.id_processo NOT IN (235,234,227,225) and t.status in (1) and t.data_cadastro < now() - interval '30 minutes'    """)
+                      where t.status in (1) and t.data_cadastro < now() - interval '30 minutes'    """)
     
      params = []
 
@@ -273,7 +334,8 @@ def process_finish_all(self):
           p.data_cadastro + interval '3 days' < now() as iniciado_a_mais_de_tres_dias,
                p.error,COUNT(t.transacao_id) AS qt_registros_total,
                COALESCE(SUM(CASE WHEN t.status = 3 THEN 1 ELSE 0 END), 0) AS qt_registros_finalizados,
-	          COALESCE(SUM(CASE WHEN t.status = 7 THEN 1 ELSE 0 END), 0) AS qt_registros_erros 
+	          COALESCE(SUM(CASE WHEN t.status = 7 THEN 1 ELSE 0 END), 0) AS qt_registros_erros ,
+	          COALESCE(SUM(CASE WHEN t.status = 8 THEN 1 ELSE 0 END), 0) AS qt_registros_erros_resposta 
               FROM 
                progestor.processo as p
           LEFT JOIN progestor.transacao as t on (t.id_processo = p.processo_id)
@@ -339,7 +401,7 @@ def up_finish_process(self, status_registros:Dict, cursor,connection):
 
 def up_status_process_seven(self, status_registros:Dict, cursor,connection):
 
-     classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO STATUS 7   {status_registros}")
+     classLogger.logger.info(f" MEU DADOS PARA SE ATUALIZADO STATUS 7 ou 8   {status_registros}")
 
       
      cmd_update = """UPDATE progestor.processo

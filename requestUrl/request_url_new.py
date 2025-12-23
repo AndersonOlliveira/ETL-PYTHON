@@ -7,6 +7,7 @@ from conection.Conexao_Mongos import mongoConect
 from models.colletion_repository import Coletion
 import json
 import time
+import random
 conn = mongoConect()
 
 
@@ -33,45 +34,70 @@ def request(self, registro: Dict) -> Dict:
         processo_id = str(registro['processo_id'])
         parametros = registro.get('parametros', '')
 
+      
 
-        classLogger.logger.info(f"minha rede de loja {loja}")
+        servidores = [self.servidor_a,self.servidor_b, self.servidor]
 
-        url = (
-            f"{self.servidor}/cns/json.chp?"
-            f"progestor_prc={processo_id}&"
-            f"rde={rede}&"
-            f"rdelja={loja}&"
-            f"ctr={contrato}&"
-            f"srvcns=1&"
-            f"tcnscod={codigo_cns}"
-            f"{parametros}"
-        )
+        print(f"minha lista de servidores {servidores}")
+        print("**" * 80)
         
-        classLogger.logger.info(f"Requisição: {url}")
-
-        erro = registro.get('erro', False)
+        servidores_random = random.sample(servidores, len(servidores))
+        
+        classLogger.logger.info(f"minha rede de loja {loja}")
+        
+        erro = True
         resposta = ""
+        
+        for servidores in servidores_random: 
+            url = (
+                f"{servidores}/cns/json.chp?"
+                f"progestor_prc={processo_id}&"
+                f"rde={rede}&"
+                f"rdelja={loja}&"
+                f"ctr={contrato}&"
+                f"srvcns=1&"
+                f"tcnscod={codigo_cns}"
+                f"{parametros}"
+            )
+                
+            classLogger.logger.info(f"Requisição: {url}")
 
-        if not erro:
-            try:
-                response = requests.get(url, timeout=(300, 300))
-                response.raise_for_status()
-                resposta = response.text
+            erro = registro.get('erro', False)
+            resposta = ""
 
-                classLogger.logger.info(f"Resposta: {resposta[:100]}...")
-                erro = False
-            except requests.exceptions.Timeout:
-                resposta = "TIMEOUT: Requisição excedeu 5 minutos"
-                erro = True
-                classLogger.logger.error(f"Timeout na requisição: {url}")
+            if not erro:
+                try:
+                    response = requests.get(url, timeout=(300, 300))
+                    response.raise_for_status()
+                    resposta = response.text
 
-            except requests.exceptions.RequestException as e:
-                resposta = f"ERRO: {str(e)}"
-                erro = True
-                classLogger.logger.error(f"Erro na requisição: {str(e)}")
+                    classLogger.logger.info(f"Resposta: {resposta[:100]}...")
+                    erro = False
+                
+                    break
+
+                except requests.exceptions.Timeout:
+                    resposta = "TIMEOUT: Requisição excedeu 5 minutos"
+                    erro = True
+                    classLogger.logger.error(f"Timeout na requisição: {url}")
+
+                except requests.exceptions.RequestException as e:
+                    resposta = f"ERRO: {str(e)}"
+                    erro = True
+                    classLogger.logger.error(f"Erro na requisição: {str(e)}")
+
+                    
                 # ajuste neste local
 
         classLogger.logger.error(f"MINHA RESPOSTA TEM O QUE? {resposta}")
+
+        if erro:
+           resposta = "ERRO: Todos os servidores falharam"
+           
+           return {
+               "erro": erro,
+                 "resposta": resposta
+                 }
         # if not resposta or resposta.strip() == "" or len(resposta) == 2:
         if resposta.strip() == "":
         # if  resposta.strip() == "" or len(resposta) == 2:

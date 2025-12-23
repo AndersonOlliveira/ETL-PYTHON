@@ -338,7 +338,7 @@ def process_finish_all(self):
 	          COALESCE(SUM(CASE WHEN t.status = 8 THEN 1 ELSE 0 END), 0) AS qt_registros_erros_resposta 
               FROM 
                progestor.processo as p
-          LEFT JOIN progestor.transacao as t on (t.id_processo = p.processo_id)
+          INNER JOIN progestor.transacao as t on (t.id_processo = p.processo_id)
           WHERE 
                (p.finalizado = false or p.finalizado is null) and
                p.pause = false 

@@ -61,8 +61,9 @@ def selecionar_all_dados(self) -> List[Dict]:
                     t.transacao_id,t.id_processo,t.campo_aquisicao,t.status,t.sucesso,
 	                  t.data_cadastro as data_cadastro_transacao,t.resposta,t.resposta_json 
                     FROM progestor.transacao t INNER JOIN progestor.processo p ON p.processo_id = t.id_processo 
-                    WHERE t.status in (0,1,4,7) AND (p.finalizado = false OR p.finalizado is null) AND 
-                    p.pause = false AND p.error = false """)
+                    WHERE t.status in (0,4) AND (p.finalizado = false OR p.finalizado is null) AND 
+                    p.pause = false AND p.error = false 
+                 and p.processo_id NOT BETWEEN 1 AND 132  """)
         
         params = []
 

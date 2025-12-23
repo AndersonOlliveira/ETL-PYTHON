@@ -16,7 +16,9 @@ class Processor:
         self.max_workers = max_workers
         self.batch_size = batch_size
         self.idProcesso = idProcesso
-        self.servidor = 'proscore.com.br'
+        self.servidor = 'https://proscore.com.br'
+      #   self.servidor_a = 'http://10.115.10.3'
+      #   self.servidor_b = 'http://10.115.10.4'  #adicionando no projeto para apresentar os 3 serves
         self.batch_counter_status1 = 0
         self.batch_counter_status2 = 0
         self.batch_counter_status4 = 0

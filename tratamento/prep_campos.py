@@ -171,8 +171,9 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
      rErros = registro['qt_registros_erros']
 
      rErrosResposta = registro['qt_registros_erros_resposta']
-
-                
+     
+     rErrosRespostaTentativa = registro['qt_registros_erros_tentativas']
+     
      try:
             
         if rErros == rTotal:
@@ -191,25 +192,22 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
             classLogger.logger.info('==' * 80)
             classLogger.logger.info(f'Ids status 7 encontrados :: {registro['processo_id']}')
             info_status, qt_status = registro['processo_id'], rErros
-           
-            # registro['new_status'],  registro['sucesso'] = 3,True
-            # classLogger.logger.info(f"===" * 80)
-            # classLogger.logger.info(f"Registro a ser finalizado em transaco pois esta marcado iniciado a 3 dias e tem processos com status 7 transacao no id {registro['processo_id']}")
         
+        
+        if inicio is True and rErrosRespostaTentativa > 0:
+            print(f'Ids status 10 encontrados :: {registro['processo_id']}')
+            info_status, qt_status = registro['processo_id'], rErrosRespostaTentativa
+           
          
         if rFinalizado == rTotal and rTotal > 0:
             
             registro['data_finalizacao'], registro['new_status'], registro['errors'] = datetime.now(),True,True
-            classLogger.logger.info(f"===" * 80)
-            classLogger.logger.info(f"REGISTRO  INSERIDO  rTotal={rTotal}, rFinalizado={rFinalizado} , o id {registro['processo_id']}")
-            classLogger.logger.info(f"====" * 80)
+          
         else:
              erro = True
              registro['erro'] = erro
             
-            #  classLogger.logger.info(f"====" * 80)
-            #  classLogger.logger.info(f"REGISTRO NÃO FINALIZADO: rTotal={rTotal}, rFinalizado={rFinalizado} , o id {registro['processo_id']}")
-     
+       
      except Exception as e:
             classLogger.logger.info(f"===" * 80)
             classLogger.logger.error(f"Erro ao gerar parâmetros: {str(e)}")

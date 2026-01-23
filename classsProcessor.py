@@ -139,11 +139,11 @@ class Processor:
                 classLogger.logger_finalizar.info("=" * 80)
                 classLogger.logger_finalizar.info(f"Início:                    {inicio.strftime('%Y-%m-%d %H:%M:%S')}")
                 classLogger.logger_finalizar.info(f"Fim:                       {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
-                classLogger.logger_finalizar.info(f"Duração:                   {duracao:.2f} segundos")
+                classLogger.logger_finalizar.info(f"Duração:                   {duration:.2f} segundos")
                 classLogger.logger_finalizar.info(f"Quantidade:                {total_processados_finalizado}")
-                classLogger.logger_finalizar.info(f"Quantidade alter status seven:                {total_alter_status_seven}")
+                classLogger.logger_finalizar.info(f"Quantidade alter status seven:  {total_alter_status_seven}")
                 # esta contagem e para contar quantos processo deram erro a consulta a api
-                classLogger.logger_finalizar.info(f"Quantidade de processos finalizado :                {total_seven_erros_up}")
+                classLogger.logger_finalizar.info(f"Quantidade de processos finalizado : {total_seven_erros_up}")
                 classLogger.logger_finalizar.info("=" * 80)
                     
                 pass

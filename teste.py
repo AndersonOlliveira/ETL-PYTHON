@@ -2,9 +2,10 @@ import datetime
 import requests
 import pandas as pd
 import time
+import json
 
 # Caminho do arquivo com os CPFs (sem cabeçalho)
-arquivo_entrada = 'poucas_linhas.csv'
+arquivo_entrada = 'arquivos/new_lista_crm.csv'
 arquivo_saida = 'saida.csv'
 
 # Lê o CSV sem cabeçalho
@@ -23,14 +24,14 @@ def request_all(dados_):
             'processo_id': 309,
             'contrato': 417039,
             'rede': 2620,
-            'codcns': 279665, #360 E CLONE
+            'codcns': 262936, #360 E CLONE
             # 'codcns': 270309,
             'nome_arquivo': arquivo_entrada,
             'aceite_execucao': True,
             'mensagem_alerta': None,
             'data_cadastro': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             'configuracao_json': '[{"plugin":111,"separar":true,"ocorrencias":10,"campos":[1,2,3,4,5,6]},{"plugin":311,"separar":false,"ocorrencias":1,"campos":[1,2]}]',
-            'campos_aquisicao': 'tcpfcnpj',
+            'campos_aquisicao': 'tlidersinistrocrmmed',
             'loja': 134387,
             'finalizado': False,
             'data_finalizacao': None,
@@ -41,11 +42,12 @@ def request_all(dados_):
             'status': 0,
             'sucesso': False,
             'data_cadastro_transacao': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'parametros': f'&tcpfcnpj={cpf}',
+            'parametros': f'&tlidersinistrocrmmed={cpf}',
             'erro': False
         }
 
-    
+        dados_plugin = False
+        resposta_nobitida = False
         # Monta a URL da requisição
         servidor = "proscore.com.br" # link para do servidor
         url = (
@@ -59,41 +61,93 @@ def request_all(dados_):
         )
 
         registro["url"] = url
+        erro = registro.get('erro', False)
+        resposta = ""
 
-        try:
-            print(url)
-            r = requests.get(url, timeout=300000)
-            r.raise_for_status()
-            resposta_texto = r.text.strip()
-                     
-            print("tenho a restosta da requisicao ANTES DA VALIDACAO")
-            print("=======inicio-----")
-            print(resposta_texto)
-            print("=======fim-----")
+        if not erro:   erro = registro.get('erro', False)
+        resposta = ""
+
+        if not erro:
+
+            try:
+                print(f"ESTOU SAINDO AQUI {url}")
+                response = requests.get(url, timeout=(300, 300))
+                response.raise_for_status()
+                resposta = response.text
+                print(f"Resposta: {resposta[:100]}...")
+                erro = False
+            except requests.exceptions.Timeout:
+                resposta = "TIMEOUT: Requisição excedeu 5 minutos"
+                erro = True
+                print(f"Timeout na requisição: {url}")
+
+            except requests.exceptions.RequestException as e:
+                resposta = f"ERRO: {str(e)}"
+                erro = True
+                print(f"Erro na requisição: {str(e)}")
+                # ajuste neste local
+
+            print(f"MINHA RESPOSTA TEM O QUE? {resposta}")
+        # if not resposta or resposta.strip() == "" or len(resposta) == 2:
+        if resposta.strip() == "":
+        # if  resposta.strip() == "" or len(resposta) == 2:
+            resposta = "RESPOSTA NâO OBTIDAS"
+            erro = True
+            resposta_nobitida = True 
+        
+
+        else:
+          
+          erro = False
+          if not len(resposta) == 2:
+          
+         
+            try:
+                dados = json.loads(resposta)
+
+                print(f"MEU JSON DENTRO DE DADOS {len(resposta)}")
             
-           
-            if not r.text.strip():
-                resposta_texto = "RESPOSTA NÃO OBITIDA"
-                registro["erro"] = True
-                registro["sucesso"] = False
-                print(f"tenho a restosta da requisicao DEPOIS DA VALIDACAO {resposta_texto}")
-               
-            else:
-                registro["sucesso"] = True
-                print(f"PASSOU NA VERIFICACAO {resposta_texto}")
-               
+                # if dados:
+                print(f"MEU JSON DENTRO DE DADOS {dados}")
+                lista_registros = dados.get("registro", [])
 
-        except Exception as e:
-            resposta_texto = f"Erro: {e}"
-            registro["erro"] = True
+                contador_total = len(lista_registros)
+                contador_plugin_9 = sum(
+                        1 for item in lista_registros
+                        if item.get("numero_plugin") == "9")
+                        #    for item in lista_registros:
+                        #         print(f"Plugin: {item.get('numero_plugin')}")
+                        #         print(f"Código: {item.get('codigo_da_mensagem')}")
+                        #         print(f"Descrição: {item.get('descricao_da_mensagem')}")
+                        #         print("----")
 
-        # Guarda o resultado
-        registro["resposta_json"] = resposta_texto
-        resultados.append(registro)
+                        #    print(f"Total de retornos: {contador_total}")
+                        #    print(f"Total plugin 9: {contador_plugin_9}")
+                
+                if contador_total > 0 and contador_plugin_9 == contador_total:
+                    erro = True
+                    dados_plugin = True
+            except json.JSONDecodeError:
+                resposta = "RESPOSTA INVALIDA — NÃO É UM JSON"
+                erro = True
+          else:
+            print(f"VOU SAIR AQUI?  {len(resposta)}")
+            resposta = "RESPOSTA NâO OBTIDA"
+            erro = True
+            resposta_nobitida = True 
 
-      
+        print(f"MEUS DADOS DE RESPOSTA {resposta}")
+        
+        registro["url"] = url
+        registro["resposta_json"] = resposta
+        registro["erro"] = erro
+        registro["puglin"] = dados_plugin
+        registro["resposta_nObitida"] = resposta_nobitida
+
+        print(f"meu registro final: {registro}")
+
         time.sleep(0.3)
-
+    resultados.append(registro)
     # Salva o resultado em CSV
     df_saida = pd.DataFrame(resultados)
     df_saida.to_csv(arquivo_saida, index=False, sep=';', encoding='utf-8-sig')

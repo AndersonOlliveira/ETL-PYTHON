@@ -25,6 +25,7 @@ if conn:
 def request(self, registro: Dict) -> Dict:
         
         dados_plugin = False
+        resposta_nobitida = False
 
         rede = str(registro['rede'])
         loja = str(registro['lj'])
@@ -76,7 +77,8 @@ def request(self, registro: Dict) -> Dict:
         if resposta.strip() == "":
         # if  resposta.strip() == "" or len(resposta) == 2:
             resposta = "RESPOSTA NâO OBTIDA"
-            erro = True 
+            erro = True
+            resposta_nobitida = True 
         
 
         else:
@@ -112,6 +114,12 @@ def request(self, registro: Dict) -> Dict:
             except json.JSONDecodeError:
                 resposta = "RESPOSTA INVALIDA — NÃO É UM JSON"
                 erro = True
+        
+          else:
+             print(f"VOU SAIR AQUI?  {len(resposta)}")
+             resposta = "RESPOSTA NâO OBTIDA"
+             erro = True
+             resposta_nobitida = True        
 
         print(f"MEUS DADOS DE RESPOSTA {resposta}")
         
@@ -119,6 +127,7 @@ def request(self, registro: Dict) -> Dict:
         registro["resposta_json"] = resposta
         registro["erro"] = erro
         registro["puglin"] = dados_plugin
+        registro["resposta_nObitida"] = resposta_nobitida
 
         print(f"meu registro final: {registro}")
 
@@ -199,7 +208,7 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
             #//* step 5 e 6 ou 7
             if  registro['erro'] and registro['puglin']:
                 
-                print(f"MEU RETORNO PARA O STATUS 7")
+                print(f"MEU RETORNO PARA O STATUS 8")
             
                 #//* step 9
                 registro['resposta_json'] = registro["resposta_json"]
@@ -219,18 +228,37 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                
                 get_id = colletion_repository.insert_document(new_array)
 
-            # si a resposta for fazia marca como 7 resposta não obitidade
+            # si a resposta for fazia marca como 4 resposta não obitive resposta para reprocessar 
             elif registro['erro']:
                   print(f"MEU RETORNO PARA O STATUS 4")
                  
                   registro['resposta_json'] = registro['resposta_json']
-                  registro['new_status'] = 7
+                  registro['new_status'] = 4
                   registro['sucesso'] = False
 
                   new_array['id_processo'] = registro['processo_id']
                   new_array['transacao_id'] = registro['transacao_id']
                   new_array['resposta_json'] = registro['resposta_json']
-                  new_array['new_status'] = 7
+                  new_array['new_status'] = 4
+                  new_array['sucesso' ] = False
+                  new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
+                
+                  atualiza_status_processando_seven(self,registro, cursor4, conn_status4)
+                  colletion_repository = Coletion(collection.name,db,collection_json.name)
+               
+                  get_id = colletion_repository.insert_document(new_array)
+
+            elif registro['erro'] and registro['resposta_nObitida']:
+                  print(f"MEU RETORNO PARA O STATUS 4")
+                 
+                  registro['resposta_json'] = registro['resposta_json']
+                  registro['new_status'] = 4 #para reprocessar os dados
+                  registro['sucesso'] = False
+
+                  new_array['id_processo'] = registro['processo_id']
+                  new_array['transacao_id'] = registro['transacao_id']
+                  new_array['resposta_json'] = registro['resposta_json']
+                  new_array['new_status'] = 4
                   new_array['sucesso' ] = False
                   new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
                 

@@ -1,5 +1,9 @@
 import os
+import threading
 import glob
+
+
+from delete_logs.limpar_logs import limpar_pasta_logs
 
 def remove_lines_from_log(log_file, lines_to_exclude, max_linhas=1000):
    
@@ -57,3 +61,17 @@ def limpar_pasta_logs(lines_to_exclude, max_linhas=1000):
             print(f"meu arquivo de log para limpeza: {arquivo}")
             caminho = os.path.join(pasta_logs, arquivo)
             remove_lines_from_log(caminho, lines_to_exclude, max_linhas)
+
+if __name__ == "__main__":
+
+      thread_limpeza = threading.Thread(
+                target=limpar_pasta_logs,
+                kwargs={
+                #   "pasta_logs": "logs",
+                "lines_to_exclude": ["DEBUG", "INFO", "secret","WARNING"],
+                "max_linhas": 10
+                },
+                daemon=True
+                )
+      thread_limpeza.start()
+      thread_limpeza.join()

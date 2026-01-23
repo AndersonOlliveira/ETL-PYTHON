@@ -1,6 +1,7 @@
 import classLogger
 from conection.transation_status import up_finish_process
 from conection.transation_status import up_status_process
+from conection.transation_status import up_status_processs
 from conection.transation_status import up_status_process_seven
 from conection import ConectionClass as classConection
 from tratamento.prep_campos import set_campos_valores_finish
@@ -23,7 +24,8 @@ def processar_finish(self):
          classLogger.logger.info(f"===" * 80)
          classLogger.logger.info("Nenhum processo encontrado para finalizar")
          classLogger.logger.info(f"===" * 80)
-         return 0
+         return 0, 0, 0
+
     
      registros_up_zero = []
      registros_up_seven = []
@@ -38,12 +40,10 @@ def processar_finish(self):
              
               registro_status, erro_preparacao , info_status,qt_status,finalizar , finaliza_Resp = set_campos_valores_finish(registro_status)
             
-            #   classLogger.logger.warn(f'tennho os id do info: {info_status}')
+            
               if finalizar or finaliza_Resp:
                     # IS PARA FINALIZAR SE TODOS FOREM 7 MARCA COMO ERRO PROCESS
-                    classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 7 : {finalizar}')
-                    classLogger.logger.info(f'MEUS ID PARA FINALIZAR COM STATUS 8 : {finaliza_Resp}')
-
+                   
                     if finaliza_Resp:
                           registros_up_seven.append(up_status_process_seven(self,finaliza_Resp,cursor_initil, conn_status))
 
@@ -52,9 +52,11 @@ def processar_finish(self):
                          registros_up_seven.append(up_status_process_seven(self,finalizar,cursor_initil, conn_status))
               
               if  info_status:
+                    classLogger.logger.warn(f'tennho os id do infos: {info_status}')
                     classLogger.logger.info("==" * 80)
                    
                     new_registros.append(up_status_process(self,info_status,cursor_initil, conn_status))
+                    new_registros.append(up_status_processs(self,info_status,cursor_initil, conn_status))
 
                     classLogger.logger.info(f"==" * 80)
                        
@@ -94,7 +96,7 @@ def processar_finish(self):
          conn_status.commit()
       
   
-     classLogger.logger.warn(f"Fase 4 concluída Finalizado Processos: {len(registros_up_zero)} ")
-
+     classLogger.logger.warn(f"Fase 4 concluída Finalizado registros_up_zero: {len(registros_up_zero)} ")
+     
      return len(registros_up_zero) , len(new_registros) , len(registros_up_seven)
     

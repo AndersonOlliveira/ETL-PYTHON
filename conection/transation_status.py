@@ -181,24 +181,50 @@ def atualiza_status_processando(self,registro: Dict, cursor, connection):
 # grava no banco a resposta com o erro do puglin
 def atualiza_status_processando_seven(self,registro: Dict, cursor, connection):
     
-          mensagens_concat = ''
-          json_resposta = registro['resposta_json']
-          try:
-               dados = json.loads(json_resposta)
-               lista_registros = dados.get("registro", [])
-               if lista_registros:
-                  print(f'SAIU AQUI')
-                  
-                  mensagens_concat = "; ".join(f"[{item.get('codigo_da_mensagem')}] {item.get('descricao_da_mensagem')}"
-                                       for item in lista_registros)
-               else:
-                   
-                  print(f"TENHO A RESPOSTA")
-                  mensagens_concat = registro['resposta_json']
+          print(f"QUE DADOS VEM AQUI")
+          print(f"QUE DADOS VEM AQUI{registro}")
+          print(f"QUAL E O MEU ID DO REGISTRO::{registro['transacao_id']}")
+          
+          tentativas = process_status_for(self, registro['transacao_id'])
+          
+          print(f"MINHA QUANTIDADE DE TENTATIVAS  {tentativas['total']}")
+          
+          MAX_TENTATIVAS = 4
+          bloquear = False
 
-          except Exception as e:
-                print("Erro ao abrir JSON:", e)
-                mensagens_concat = json_resposta
+          if(tentativas['total'] >= MAX_TENTATIVAS and tentativas['info_eleven'] == 0):
+               registro['new_status'] = 10
+               mensagens_concat = (
+               f"Transação bloqueada após {tentativas['total']} tentativas "
+               f"sem resposta da API") 
+               bloquear = True
+          elif tentativas['info_eleven'] > 0:
+               registro['new_status'] = 3
+               registro['sucesso'] = True
+               mensagens_concat = (
+               f"Transação com retorno invalido depois de x {tentativas['total']} tentativas "
+               f"sem resposta da API") 
+               bloquear = True
+               registro['resposta_json'] = 'error'
+          else:   
+
+            # segue fluxo normal
+              mensagens_concat = ""
+         
+          if not bloquear:
+               json_resposta = registro['resposta_json']
+               try:
+                    dados = json.loads(json_resposta)
+                    lista_registros = dados.get("registro", [])
+                    if lista_registros:
+                         mensagens_concat = "; ".join(f"[{item.get('codigo_da_mensagem')}] {item.get('descricao_da_mensagem')}"
+                                        for item in lista_registros)
+                    else:
+                         mensagens_concat = registro['resposta_json']
+
+               except Exception as e:
+                    print("Erro ao abrir JSON:", e)
+                    mensagens_concat = json_resposta
               
           
          
@@ -207,22 +233,52 @@ def atualiza_status_processando_seven(self,registro: Dict, cursor, connection):
           # print(f"Mensagens concatenadas: {registro['resposta_json']}")
           print(mensagens_concat)
 
-     
-          query = """
-               INSERT INTO progestor.log_transacao 
-                    (id_processo, campo_aquisicao, status,sucesso,resposta)
-               VALUES 
-                    (%s, %s, %s,%s,%s)  """
+               
+          colunas = [
+          "id_processo",
+          "campo_aquisicao",
+          "status",
+          "sucesso",
+          "resposta"
+          ]
 
-     
+          valores = [
+          registro['processo_id'],
+          registro['campo_aquisicao'],
+          registro['new_status'],
+          registro['sucesso'],
+          mensagens_concat
+          ]
+
+          placeholders = ["%s", "%s", "%s", "%s","%s"]
+
+          # Só adiciona resposta_json quando new_status == 4
+          if registro['new_status'] == 4:
+               colunas.append("resposta_json")
+               valores.append(registro['transacao_id'])
+               placeholders.append("%s")
+          
+          if registro['new_status'] == 3:
+               colunas.append("resposta_json")
+               valores.append(registro['resposta_json'])
+               placeholders.append("%s")
+
+          query = f"""
+          INSERT INTO progestor.log_transacao
+          ({", ".join(colunas)})
+          VALUES
+          ({", ".join(placeholders)})
+          """
+
+          print(f"Meus SQL{query}")
           try:
-               cursor.execute(query, (
-               registro['processo_id'],
-               registro['campo_aquisicao'],
-               registro['new_status'],
-               registro['sucesso'],
-               mensagens_concat
-            ))
+               cursor.execute(query,valores)
+               # registro['processo_id'],
+               # registro['campo_aquisicao'],
+               # registro['new_status'],
+               # registro['sucesso'],
+               # mensagens_concat
+          #   ))
           
           
                with self.lock:
@@ -236,7 +292,7 @@ def atualiza_status_processando_seven(self,registro: Dict, cursor, connection):
                          classLogger.logger.info(f"Status atualizado para :: {registro.get('new_status')} - Transação {registro.get('transacao_id')}")
 
           except Exception as e:
-           classLogger.logger.error(f"Erro ao atualizar status para :: {registro.get('new_status')} - {str(e)}")
+           classLogger.logger.error(f"NOVO ERRO PARA SALVAR :: {registro.get('new_status')} - {str(e)}")
 
 
 
@@ -297,6 +353,56 @@ def process_status_zero(self):
                 registros = cursor.fetchall()
                 classLogger.logger.info(f" Dados Capturados Status 1 {len(registros)} registros para processamento.")
                 return [dict(registro) for registro in registros]
+        
+
+def process_status_for(self,trasancao):
+      
+     print(f"ESTOU CHAMANDO O PROCESS FOR ")
+     
+     query = """
+        SELECT COUNT(*) AS total,
+         (select count(t.status) as info_eleven FROM progestor.log_transacao as t 
+          where t.status = 11 and t.resposta_json::text = '%s' limit 1)
+          FROM progestor.log_transacao AS t
+          WHERE t.status IN (4,7)
+          AND t.resposta_json::text = '%s' and t.resposta_json is not null
+    """
+     try:
+          with ConectionClass.DbConnect(self.config) as conn:
+           with conn.cursor() as cursor:
+               cursor.execute(query, (trasancao,trasancao,))
+               print(f"meu resultado{cursor}")
+               resultado = cursor.fetchone()  # <-- UMA LINHA
+
+               if resultado:
+                    total, info_eleven = resultado
+                    return {
+                        "total": total,
+                        "info_eleven": info_eleven
+                    }
+     except Exception as e:
+       classLogger.logger.error(f"FALHA EM PEGAR DADOS  {str(e)}")
+
+
+
+def process_status_eleven(self,trasancao):
+      
+     print(f"ESTOU CHAMANDO O PROCESS FOR ")
+     
+     query = """
+        SELECT COUNT(*) AS total
+        FROM progestor.log_transacao AS t
+        WHERE t.status IN (11)
+        AND t.campo_aquisicao is not null and t.resposta_json is not null and t.id_processo = %s 
+    """
+     try:
+          with ConectionClass.DbConnect(self.config) as conn:
+           with conn.cursor() as cursor:
+               cursor.execute(query, (trasancao,))
+               total = cursor.fetchone()[0]
+               return total
+     except Exception as e:
+       classLogger.logger.error(f"FALHA EM PEGAR DADOS  {str(e)}")
      
 
 def up_status(self,status_registros:Dict, cursor,connection):
@@ -335,7 +441,8 @@ def process_finish_all(self):
                p.error,COUNT(t.transacao_id) AS qt_registros_total,
                COALESCE(SUM(CASE WHEN t.status = 3 THEN 1 ELSE 0 END), 0) AS qt_registros_finalizados,
 	          COALESCE(SUM(CASE WHEN t.status = 7 THEN 1 ELSE 0 END), 0) AS qt_registros_erros ,
-	          COALESCE(SUM(CASE WHEN t.status = 8 THEN 1 ELSE 0 END), 0) AS qt_registros_erros_resposta 
+	          COALESCE(SUM(CASE WHEN t.status = 8 THEN 1 ELSE 0 END), 0) AS qt_registros_erros_resposta,
+               COALESCE(SUM(CASE WHEN t.status = 10 THEN 1 ELSE 0 END), 0) AS qt_registros_erros_tentativas
               FROM 
                progestor.processo as p
           INNER JOIN progestor.transacao as t on (t.id_processo = p.processo_id)
@@ -347,23 +454,10 @@ def process_finish_all(self):
           HAVING COUNT(t.transacao_id) > 0  
           ORDER BY p.processo_id desc;""")
                
-     params = []
-
-     # if self.idProcesso is not None:
-     #       query += ' AND t.id_processo = %s '
-     #       params.append(self.idProcesso)
-                              
-     # query += " ORDER BY t.transacao_id LIMIT %s;";
-     # params.append(self.batch_size)
-
-            
-     # classLogger.logger.info(query)
-     # classLogger.logger.warn(f"[DEBUG SQL] Query gerada:\n{query}")
-     # classLogger.logger.warn(f"[DEBUG SQL] Parâmetros: {params}")
-     
+               
      with ConectionClass.DbConnect(self.config) as conn:
              with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-                cursor.execute(query, tuple(params))
+                cursor.execute(query,)
                 registros = cursor.fetchall()
                 classLogger.logger.info(f" Dados Capturados do que esta em andamento {len(registros)} registros para processamento.")
                 return [dict(registro) for registro in registros]
@@ -442,6 +536,35 @@ def up_status_process(self,registros:Dict, cursor,connection):
                True,
                registros,
                7
+          ))
+         
+          with self.lock:
+          
+            self.batch_counter_status1 += 1
+            if self.batch_counter_status1 >= 1:
+               connection.commit()
+               self.batch_counter_status1 = 0
+
+               classLogger.logger.info(f"Status atualizado para o Status - Para todos que tem o id {registros}")
+
+     except Exception as e:
+      classLogger.logger.error(f"Erro ao atualizar status para 3: {str(e)}")
+        
+
+def up_status_processs(self,registros:Dict, cursor,connection):
+     # REALIZO O UP SE TIVER MAIS DE 3 DIAS NO STATUS 10
+
+     classLogger.logger.info(f"ids para atualizar: {registros}")    
+    
+     cmd_update = """UPDATE progestor.transacao SET 
+                  status = %s , sucesso = %s WHERE id_processo = %s and status = %s;"""
+         
+     try:
+          cursor.execute(cmd_update,(
+               3,
+               True,
+               registros,
+               10
           ))
          
           with self.lock:

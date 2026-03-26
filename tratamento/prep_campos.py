@@ -173,8 +173,24 @@ def set_campos_valores_finish(registro: Dict) -> Tuple[Dict, bool]:
      rErrosResposta = registro['qt_registros_erros_resposta']
      
      rErrosRespostaTentativa = registro['qt_registros_erros_tentativas']
+
+
+    #  somatoria = (rFinalizado + rErrosResposta)
+ 
+ 
+    #  print(f'MEUS DADOS VINDO AQUI {somatoria}')
+
+
+
+
+
      
      try:
+
+        
+        # if somatoria == rTotal:
+        #     print(f'QUAL ID VAI APARECER AQUI? {registro['processo_id']}')
+        #     finalizar = registro['processo_id']
             
         if rErros == rTotal:
             classLogger.logger.info(f"IDs a ser finalizado se tiver o status 7: {registro['processo_id']} ")

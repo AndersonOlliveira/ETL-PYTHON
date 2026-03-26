@@ -203,7 +203,9 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
             #//* step 4 - REQUEST
             registro = request(self,registro)
             classLogger.logger.info('MEUS ERRO::')
-            classLogger.logger.info(f'MEUS ERRO:: {registro}')
+            classLogger.logger.info(f'MEU REGISTRO CONSULTADO:: {registro}')
+            classLogger.logger.info(f'MEU REGISTRO CONSULTADO:: {registro["new_status"]}')
+            # registro
 
             #//* step 5 e 6 ou 7
             if  registro['erro'] and registro['puglin']:
@@ -214,13 +216,18 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                 registro['resposta_json'] = registro["resposta_json"]
                 registro['new_status'] = 8
                 registro['sucesso'] = False
+                registro['resposta_json'] = 'error'
 
                 new_array['id_processo'] = registro['processo_id']
                 new_array['transacao_id'] = registro['transacao_id']
                 new_array['resposta_json'] = registro["resposta_json"]
                 new_array['new_status'] = 8
                 new_array['sucesso' ] = False
-                new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
+                new_array['resposta_json'] = 'error'
+                new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S')
+
+                print(f"new_array: {registro['new_status']}") 
+                print(f"new_array: {registro['sucesso']}") 
         
                 
                 atualiza_status_processando_seven(self,registro, cursor4, conn_status4)
@@ -242,11 +249,14 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                   new_array['new_status'] = 4
                   new_array['sucesso' ] = False
                   new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
+
+                  print(f"new_array: {registro['new_status']}") 
+                  print(f"new_array: {registro['sucesso']}") 
                 
-                  atualiza_status_processando_seven(self,registro, cursor4, conn_status4)
-                  colletion_repository = Coletion(collection.name,db,collection_json.name)
+                #   atualiza_status_processando_seven(self,registro, cursor4, conn_status4)
+                #   colletion_repository = Coletion(collection.name,db,collection_json.name)
                
-                  get_id = colletion_repository.insert_document(new_array)
+                #   get_id = colletion_repository.insert_document(new_array)
 
             elif registro['erro'] and registro['resposta_nObitida']:
                   print(f"MEU RETORNO PARA O STATUS 4")
@@ -261,11 +271,14 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
                   new_array['new_status'] = 4
                   new_array['sucesso' ] = False
                   new_array['time'] =  time.strftime('t%Y-%m-%d %H:%M:%S') 
+
+                  print(f"new_array: {registro['new_status']}") 
+                  print(f"new_array: {registro['sucesso']}") 
                 
-                  atualiza_status_processando_seven(self,registro, cursor4, conn_status4)
-                  colletion_repository = Coletion(collection.name,db,collection_json.name)
+                #   atualiza_status_processando_seven(self,registro, cursor4, conn_status4)
+                #   colletion_repository = Coletion(collection.name,db,collection_json.name)
                
-                  get_id = colletion_repository.insert_document(new_array)
+                #   get_id = colletion_repository.insert_document(new_array)
 
 
                 #//* step 5 e 6
@@ -273,6 +286,12 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
             else:   
                 
                 registro , testeS = limpa_resposta_premium(self,registro)
+                print(f"new_array: {registro['new_status']}") 
+                print(f"new_array: {registro['sucesso']}") 
+
+                classLogger.logger.info(f"MEU REGISTRO APÓS LIMPEZA:: {registro}")
+                
+                
                 
                 
                 atualiza_status_processando(self,registro, cursor2, conn_status2)
@@ -301,7 +320,7 @@ def processar_request(self, registro: Dict, conn_status2, conn_status4) -> None:
         
 
             cursor4 = conn_status4.cursor()
-            atualiza_status_processando(self,registro, cursor4, conn_status4)
-            colletion_repository = Coletion(collection.name,db,collection_json.name)
-            get_id = colletion_repository.insert_document(teste)
+            # atualiza_status_processando(self,registro, cursor4, conn_status4)
+            # colletion_repository = Coletion(collection.name,db,collection_json.name)
+            # get_id = colletion_repository.insert_document(teste)
             cursor4.close()

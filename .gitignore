@@ -3,6 +3,9 @@
 sftp.json
 venv
 .venv
+.log
 progestor_proscore.log
 progestor_proscore
 .progestor_proscore
+**/__pycache__/
+*.pyc

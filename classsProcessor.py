@@ -148,8 +148,8 @@ class Processor:
                     
                 pass
     def executar_ciclo(self):
-        self.executar()
-        self.executar_finalizar()
-        self.executar_zero()
+      #   self.executar()
+      #   self.executar_finalizar()
+      #   self.executar_zero()
         self.executar_finalizar_process()
         classLogger.logger.info(f"[{time.strftime('%H:%M:%S')}] Processador {self.idProcesso}: Ciclo completo.")

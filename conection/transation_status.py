@@ -60,7 +60,7 @@ def up_process(registros):
      cursor = context_conection.cursor()
    
      for new_registro in registros:
-      print(new_registro['processo_id'])
+      print(f"processo_id {new_registro['processo_id']}")
      
       cmd_update = """UPDATE progestor.processo SET finalizado = %s, data_finalizacao =%s WHERE processo_id = %s;"""
       values = (new_registro['new_status'],new_registro['data_finalizacao'],new_registro['processo_id'])
@@ -148,12 +148,7 @@ def atualiza_status_processando(self,registro: Dict, cursor, connection):
            VALUES 
                (%s, %s, %s,%s)  """
 
-     #   """  query = """
-     #       INSERT INTO progestor.log_transacao 
-     #           (id_processo, campo_aquisicao, status,resposta_json,sucesso)
-     #       VALUES 
-     #           (%s, %s, %s,%s,%s)
-     #   """
+    
     try:
         cursor.execute(query, (
             registro['processo_id'],
@@ -232,6 +227,8 @@ def atualiza_status_processando_seven(self,registro: Dict, cursor, connection):
           print(f"Mensagens concatenadas:")
           # print(f"Mensagens concatenadas: {registro['resposta_json']}")
           print(mensagens_concat)
+
+          print(f"""Meu status atualizado:: {registro['new_status']} - Transação {registro['transacao_id']}""")
 
                
           colunas = [
@@ -438,7 +435,9 @@ def process_finish_all(self):
      query = ("""SELECT p.processo_id,p.data_cadastro,p.data_finalizacao,
                p.finalizado, 
           p.data_cadastro + interval '3 days' < now() as iniciado_a_mais_de_tres_dias,
-               p.error,COUNT(t.transacao_id) AS qt_registros_total,
+               p.error,
+          
+               COALESCE(SUM(CASE WHEN t.status != 6 THEN 1 ELSE 0 END), 0) AS qt_registros_total,
                COALESCE(SUM(CASE WHEN t.status = 3 THEN 1 ELSE 0 END), 0) AS qt_registros_finalizados,
 	          COALESCE(SUM(CASE WHEN t.status = 7 THEN 1 ELSE 0 END), 0) AS qt_registros_erros ,
 	          COALESCE(SUM(CASE WHEN t.status = 8 THEN 1 ELSE 0 END), 0) AS qt_registros_erros_resposta,
@@ -449,7 +448,7 @@ def process_finish_all(self):
           WHERE 
                (p.finalizado = false or p.finalizado is null) and
                p.pause = false 
-                AND p.error = false
+                AND p.error = false AND p.processo_id = 170
           GROUP BY p.processo_id,p.data_cadastro,p.data_finalizacao, p.finalizado,p.error
           HAVING COUNT(t.transacao_id) > 0  
           ORDER BY p.processo_id desc;""")

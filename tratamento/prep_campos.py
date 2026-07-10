@@ -90,7 +90,7 @@ def set_campos_valores_aquisicao(registro: Dict) -> Tuple[Dict, bool]:
             classLogger.logger.info(f"Associação inicial (zip): {dados_associados}")
 
         # 2. LÓGICA DE CORREÇÃO PARA CASO DE UM ÚNICO VALOR (Inferência de CPF/CNPJ)
-        if len(valores) == 1:
+        if len(valores) == 0:
             valor_unico = valores[0].strip()
             
             # Checa se o único valor parece ser um CPF/CNPJ (11 ou 14 dígitos numéricos)

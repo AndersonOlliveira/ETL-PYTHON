@@ -6,6 +6,7 @@ import classLogger
 import threading
 
 if __name__ == "__main__":
+    # EM PRODUCAO TEM O VALOR DE 1000 REGISTROS
     instance = Processor(max_workers=5, batch_size=1, idProcesso=80)
     # instance = Processor(max_workers=5, batch_size=10)
     tempo_espera_ciclo = 60  # Tempo de espera (em segundos) entre um ciclo e outro

@@ -30,6 +30,7 @@ nohup /home/proscore/new_projeto_progestor/.venv/bin/python \
 /home/proscore/new_projeto_progestor/arquivo_initil.py \
 > /home/proscore/new_projeto_progestor/log_processo.log 2>&1 &
 
+/home/proscore/chp/prod/pag/relatz/cron >> /home/proscore/chp/prod/pag/relatz/cron/log_processo.log 2>&1
 
 
 Navegue até o diretório do seu projeto e use o seguinte comando: 

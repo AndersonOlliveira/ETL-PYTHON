@@ -55,7 +55,8 @@ def request(self, registro: Dict) -> Dict:
 
         if not erro:
             try:
-                response = requests.get(url, timeout=(300, 300))
+                # SERVE 5.114 DEU ERRO DE SSL POR ISSO DO VERIFY
+                response = requests.get(url, timeout=(300, 300),verify=False )
                 response.raise_for_status()
                 resposta = response.text
 
@@ -89,10 +90,6 @@ def request(self, registro: Dict) -> Dict:
             try:
                 dados = json.loads(resposta)
 
-                print(f"MEU JSON DENTRO DE DADOS {len(resposta)}")
-            
-                # if dados:
-                print(f"MEU JSON DENTRO DE DADOS {dados}")
                 lista_registros = dados.get("registro", [])
 
                 contador_total = len(lista_registros)
@@ -116,20 +113,16 @@ def request(self, registro: Dict) -> Dict:
                 erro = True
         
           else:
-             print(f"VOU SAIR AQUI?  {len(resposta)}")
              resposta = "RESPOSTA NâO OBTIDA"
              erro = True
              resposta_nobitida = True        
 
-        print(f"MEUS DADOS DE RESPOSTA {resposta}")
-        
         registro["url"] = url
         registro["resposta_json"] = resposta
         registro["erro"] = erro
         registro["puglin"] = dados_plugin
         registro["resposta_nObitida"] = resposta_nobitida
 
-        print(f"meu registro final: {registro}")
 
         return registro
 

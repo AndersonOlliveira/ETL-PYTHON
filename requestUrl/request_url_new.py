@@ -67,7 +67,7 @@ def request(self, registro: Dict) -> Dict:
 
             if not erro:
                 try:
-                    response = requests.get(url, timeout=(300, 300))
+                    response = requests.get(url, timeout=(10, 30))
                     response.raise_for_status()
                     resposta = response.text
 
